@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KKN Nalarasa — Desa Ujung-ujung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F1E6; --surface:#FFFFFF; --ink:#221F17; --ink-soft:#635C4C;
+  --green:#2E6B52; --green-dark:#1E4A38; --gold:#C08A2E; --gold-soft:#EADFC2;
+  --border:#DFDBC9; --radius:14px;
+  --font-display:'Spectral',serif; --font-body:'Plus Jakarta Sans',sans-serif;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161810; --surface:#1F2217; --ink:#F3F1E6; --ink-soft:#B9B49E;
+    --green:#5FA483; --gold:#D7A84C; --gold-soft:#332B18; --border:#333527;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161810; --surface:#1F2217; --ink:#F3F1E6; --ink-soft:#B9B49E;
+  --green:#5FA483; --gold:#D7A84C; --gold-soft:#332B18; --border:#333527;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+body{font-family:var(--font-body);background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+section{padding:5.5rem 0}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;color:var(--ink)}
+
+/* NAV */
+nav {position: sticky;top: 0;z-index: 50;width: 100%;background: color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter: blur(10px);border-bottom: 1px solid var(--border);}
+.nav-inner {max-width: 1120px;margin: 0 auto;padding: 0.9rem 1.5rem;display: flex;align-items: center;justify-content: space-between;}
+/* LOGO + NAMA */
+.brand {display: flex;align-items: center;gap: 0.6rem;color: var(--ink);text-decoration: none;font-family: var(--font-display);font-weight: 700;font-size: 1.2rem;}
+.brand .logo {width: 36px;height: 36px;object-fit: cover;border-radius: 10px;}
+/* MENU */
+.nav-links {display: flex;align-items: center;gap: 1.9rem;}
+.nav-links a {color: var(--ink-soft);text-decoration: none;font-size: 0.92rem;}
+.nav-links a:hover {color: var(--green);}
+/* TOMBOL MASUK */
+.nav-login {border: 1.5px solid var(--ink);padding: 0.5rem 1.2rem;border-radius: 100px;font-size: 0.88rem !important;font-weight: 600;}
+.nav-login:hover {background: var(--ink);color: var(--bg) !important;}
+/* MENU MOBILE */
+.nav-toggle {display: none;flex-direction: column;gap: 4px;
+background: none;
+border: none;
+cursor: pointer;}
+.nav-toggle span {
+    width: 22px;
+    height: 2px;
+    background: var(--ink);}
+
+/* HERO */
+.hero{padding:4.5rem 0 5rem}
+.hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:3rem;align-items:center}
+.eyebrow{font-family:var(--font-display);font-style:italic;color:var(--green);font-size:1rem;margin-bottom:1rem}
+.hero h1{font-size:clamp(2.1rem,4.2vw,3.2rem);line-height:1.12;margin-bottom:1.3rem}
+.hero p.lead{color:var(--ink-soft);font-size:1.05rem;max-width:46ch;margin-bottom:2rem}
+.btn-row{display:flex;gap:0.9rem;flex-wrap:wrap;margin-bottom:2.8rem}
+.btn{padding:0.85rem 1.6rem;border-radius:100px;font-weight:600;font-size:0.92rem;display:inline-block;transition:.2s}
+.btn-solid{background:var(--green);color:#fff}
+.btn-solid:hover{background:var(--green-dark)}
+.btn-outline{border:1.5px solid var(--border);color:var(--ink)}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+.stat-row{display:flex;gap:2.2rem;flex-wrap:wrap}
+.stat h3{font-size:1.8rem;color:var(--green)}
+.stat p{font-size:0.82rem;color:var(--ink-soft)}
+.hero-visual {width: 100%;border-radius: 20px;overflow: hidden;position: relative;}
+.hero-visual img {width: 100%;height: auto;display: block;border-radius: 20px;}
+
+/* SECTION HEADER */
+.s-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.s-label{font-family:var(--font-display);font-style:italic;color:var(--gold);font-size:0.95rem;margin-bottom:0.3rem}
+.s-title{font-size:clamp(1.5rem,2.6vw,2rem)}
+.s-desc{color:var(--ink-soft);max-width:50ch;margin-top:0.4rem;font-size:0.95rem}
+
+/* PROFIL */
+#profil{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.profil-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:3rem}
+.profil-grid p{color:var(--ink-soft);margin-bottom:1rem}
+.visi-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem}
+.visi-card h4{font-size:1.05rem;margin-bottom:0.8rem}
+.visi-card ul{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+.visi-card li{display:flex;gap:0.7rem;font-size:0.92rem;color:var(--ink-soft)}
+.visi-card li::before{content:"✦";color:var(--gold);flex-shrink:0}
+.loc-line{display:flex;gap:0.5rem;align-items:baseline;margin-top:1.5rem;font-size:0.88rem;color:var(--ink-soft)}
+.loc-line strong{color:var(--ink)}
+
+/* PROGRAM */
+.program-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem}
+.p-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.6rem;transition:.2s}
+.p-card:hover{border-color:var(--green);transform:translateY(-2px)}
+.p-card .p-num{font-family:var(--font-display);font-style:italic;color:var(--gold);font-size:0.85rem;margin-bottom:0.9rem}
+.p-card h4{font-size:1.05rem;margin-bottom:0.5rem}
+.p-card p{font-size:0.86rem;color:var(--ink-soft)}
+
+/* BERITA */
+#berita{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.berita-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.b-card{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg);transition:.2s}
+.b-card:hover{border-color:var(--green)}
+/* UKURAN GAMBAR DISAMAKAN */
+/* GAMBAR CARD BERITA */
+.b-thumb {
+    position: relative;
+    width: 100%;
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
+    overflow: hidden;
+    border-radius: 16px 16px 0 0;
+    flex-shrink: 0;
+}
+
+.b-thumb img {
+    width: 100% !important;
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.b-cat{
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:0.04em;
+    color:var(--gold-soft);
+    background:rgba(255,255,255,0.15);
+    padding:0.3rem 0.7rem;
+    border-radius:100px;
+}
+
+.b-body{
+    padding:1.3rem;
+    flex:1;
+}
+
+.b-date{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:0.5rem;
+}
+
+.b-body h4{
+    font-size:1.02rem;
+    margin-bottom:0.6rem;
+    line-height:1.35;
+}
+
+.b-body p{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    margin-bottom:0.9rem;
+}
+
+.b-link{
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--green);
+}
+
+/* KONTAK */
+.kontak-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:3rem}
+.kontak-info p{color:var(--ink-soft);margin-bottom:1.6rem;max-width:38ch}
+.k-item{display:flex;gap:0.9rem;margin-bottom:1.3rem}
+.k-icon{width:38px;height:38px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.k-item h5{font-size:0.9rem;margin-bottom:0.15rem}
+.k-item p{font-size:0.86rem;color:var(--ink-soft);margin:0}
+.k-form{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.f-group{margin-bottom:1rem;display:flex;flex-direction:column;gap:0.4rem}
+.f-group label{font-size:0.82rem;font-weight:600}
+.f-group input,.f-group textarea{padding:0.75rem 1rem;border:1px solid var(--border);border-radius:10px;font-family:var(--font-body);font-size:0.9rem;background:var(--bg);color:var(--ink);outline:none}
+.f-group input:focus,.f-group textarea:focus{border-color:var(--green)}
+.f-submit{background:var(--green);color:#fff;border:none;padding:0.85rem 1.7rem;border-radius:100px;font-weight:600;font-family:var(--font-body);font-size:0.9rem;cursor:pointer}
+.f-note{font-size:0.82rem;color:var(--green);margin-top:0.8rem;display:none}
+
+/* FOOTER */
+footer{background:var(--green-dark);color:#EDE9D8;padding:3.5rem 0 1.5rem;padding-bottom:calc(1.5rem + env(safe-area-inset-bottom,0px))}
+.f-grid{display:grid;grid-template-columns:1.3fr 0.8fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+.f-brand{display:flex;align-items:center;gap:0.6rem;font-family:var(--font-display);font-weight:700;font-size:1.15rem;margin-bottom:0.9rem}
+.f-brand {display: flex;align-items: center;gap: 0.6rem;font-family: var(--font-display);font-weight: 700;font-size: 1.15rem;margin-bottom: 0.9rem;color: #EDE9D8;}
+.f-brand .logo {width: 36px;height: 36px;object-fit: cover;border-radius: 10px;}
+.f-grid p{font-size:0.87rem;color:#C9C4AE;max-width:32ch}
+.f-col h5{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.04em;color:#EDE9D8;margin-bottom:0.9rem;font-family:var(--font-body);font-weight:700}
+.f-col a,.f-col li{display:block;font-size:0.87rem;color:#C9C4AE;margin-bottom:0.6rem}
+.f-col a:hover{color:var(--gold)}
+.f-socials{display:flex;gap:0.7rem;margin-top:0.3rem}
+.f-socials a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(237,233,216,0.3);display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:.2s}
+.f-socials a:hover{background:var(--gold);border-color:var(--gold);color:var(--green-dark)}
+.f-bottom{border-top:1px solid rgba(237,233,216,0.15);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;font-size:0.8rem;color:#B4AF98}
+
+@media (max-width:860px){
+  .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--bg);flex-direction:column;align-items:flex-start;padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:none;gap:1rem}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:flex}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{order:-1;aspect-ratio:16/9}
+  .profil-grid{grid-template-columns:1fr}
+  .program-grid{grid-template-columns:repeat(2,1fr)}
+  .berita-grid{grid-template-columns:1fr}
+  .kontak-grid{grid-template-columns:1fr}
+  .f-row{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr}
+  section{padding:3.5rem 0}
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+
+        <a href="index.html" class="brand">
+            <img src="logo.jpeg" alt="Logo KKN Nalarasa" class="logo">
+            <span>KKN NALARASA</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="program.html">Program Kerja</a>
+            <a href="berita page.html">Berita</a>
+            <a href="kontak.html">Kontak</a>
+            <a href="login.html" class="nav-login">Masuk</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</nav>
+
+<section class="hero" id="beranda">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Kuliah Kerja Nyata · Desa Ujung-ujung</p>
+      <h1>Merajut nalar dan rasa untuk desa yang tumbuh bersama.</h1>
+      <p class="lead">Nalarasa adalah kelompok KKN yang hadir di tengah masyarakat Desa Ujung-ujung untuk belajar, berbagi, dan membangun bersama — mulai dari pendidikan anak, kesehatan warga, hingga penguatan ekonomi desa.</p>
+      <div class="btn-row">
+        <a href="program.html" class="btn btn-solid">Lihat Program Kerja</a>
+        <a href="kontak.html" class="btn btn-outline">Hubungi Kami</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><h3>12</h3><p>Mahasiswa Terlibat</p></div>
+        <div class="stat"><h3>12</h3><p>Program Kerja</p></div>
+        <div class="stat"><h3>45</h3><p>Hari Pengabdian</p></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual">
+    <img src="minang.jpeg" alt="Foto kelompok KKN Nalarasa">
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="profil">
+  <div class="wrap profil-grid">
+    <div>
+      <h2 class="s-title">Profil KKN Nalarasa</h2>
+      <p style="margin-top:1.4rem;">Nalarasa merupakan kelompok Kuliah Kerja Nyata yang ditempatkan di Desa Ujung-ujung, sebuah desa agraris dengan potensi pertanian, kerajinan tangan, dan generasi muda yang antusias belajar. Nama Nalarasa lahir dari gabungan "nalar" dan "rasa" — semangat kami untuk berpikir jernih sekaligus peka terhadap kebutuhan masyarakat.</p>
+      <p>Selama masa pengabdian, kami tinggal, belajar, dan bekerja bersama warga untuk merancang program yang benar-benar menjawab kebutuhan desa, bukan sekadar menjalankan agenda kampus.</p>
+    </div>
+    <div class="visi-card">
+      <h4>Tema KKN</h4>
+      <ul>
+        <li>Menjadi mitra belajar yang membumi bagi masyarakat Desa Ujung-ujung.</li>
+        <li>Meningkatkan akses pendidikan dan literasi bagi anak-anak desa.</li>
+        <li>Mendorong pola hidup sehat melalui edukasi dan layanan dasar.</li>
+        <li>Menguatkan ekonomi warga lewat pendampingan UMKM dan kerajinan lokal.</li>
+        <li>Menjaga lingkungan desa melalui pengelolaan sampah dan penghijauan.</li>
+      </ul>
+      <div class="loc-line">📍 <span><strong>Lokasi:</strong> Desa Ujung-ujung, Kec. Pabelan, Kab. Semarang Jawa Tengah</span></div>
+      <div class="loc-line">🎓 <span><strong>Periode:</strong> September — Oktober 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <p class="s-label">Empat Bidang Fokus</p>
+        <h2 class="s-title">Program Kerja</h2>
+      </div>
+      <p class="s-desc">Program disusun bersama perangkat desa dan karang taruna agar tepat sasaran dan berkelanjutan setelah masa KKN berakhir.</p>
+    </div>
+    <div class="program-grid">
+      <div class="p-card">
+        <p class="p-num">Bidang 1</p>
+        <h4>Pendidikan</h4>
+        <p>Bimbingan belajar, taman baca, dan pelatihan literasi digital untuk anak-anak Sukamulya.</p>
+      </div>
+      <div class="p-card">
+        <p class="p-num">Bidang 2</p>
+        <h4>Kesehatan</h4>
+        <p>Posyandu, penyuluhan gizi, dan edukasi pola hidup bersih dan sehat bagi warga.</p>
+      </div>
+      <div class="p-card">
+        <p class="p-num">Bidang 3</p>
+        <h4>Ekonomi Kreatif</h4>
+        <p>Pendampingan UMKM, pelatihan pemasaran digital, dan pengembangan produk kerajinan desa.</p>
+      </div>
+      <div class="p-card">
+        <p class="p-num">Bidang 4</p>
+        <h4>Lingkungan</h4>
+        <p>Pengelolaan sampah rumah tangga, penanaman pohon, dan kampanye desa bersih.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="berita">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <p class="s-label">Kabar Terbaru</p>
+        <h2 class="s-title">Berita &amp; Kegiatan</h2>
+      </div>
+      <p class="s-desc">Dokumentasi kegiatan kami selama mengabdi di Desa Sukamulya.</p>
+    </div>
+    <div class="berita-grid">
+      <article class="b-card">
+       <div class="b-thumb"><img src="PENYERAHAN.jpeg" alt="Program Pendidikan"></div>
+        <div class="b-body">
+          <p class="b-date">16 September 2026</p>
+          <h4>Penerjunan PPM 2026, Kelompok Nalarasa Siap Berkontribusi di Desa Ujung-Ujung</h4>
+          <p>PPM tahun 2026 mengusung tema “Moderasi Beragama, Optimalisasi Potensi Lokal, Ketahanan Keluarga, dan Hidup Bersih Sehat.”</p>
+          <a href="berita.html" class="b-link">Baca selengkapnya</a>
+        </div>
+      </article>
+      <article class="b-card">
+       <div class="b-thumb"><img src="thumbnail2.jpeg" alt="Program Pendidikan"></div>
+        <div class="b-body">
+          <p class="b-date">27 September 2026</p>
+          <h4>Pemdes Ujung-Ujung Gelar Musrenbangdes untuk Penyusunan RKPDes Tahun 2027</h4>
+          <p>Pemdes Ujung-Ujung menggelar Musrenbangdes untuk menyusun RKPDes 2027 dan DU RKP 2028, diikuti 52 peserta dari berbagai unsur.</p>
+          <a href="berita2.html" class="b-link">Baca selengkapnya</a>
+        </div>
+      </article>
+        <article class="b-card">
+    <div class="b-thumb">
+        <img src="thumbnailberita1.jpeg" alt="Pelaku UMKM">
+        <span class="b-cat">Ekonomi Kreatif</span>
+    </div>
+
+    <div class="b-body">
+        <p class="b-date">2 Agustus 2026</p>
+
+        <h4>
+            Tingkatkan Kesadaran Masyarakat, KKN Nalarasa Gelar Sosialisasi Pemeliharaan
+             Arsip Keluarga di Desa Ujung-Ujung
+        </h4>
+
+        <p>
+            Ujung-Ujung, 15 Oktober 2026-Mahasiswa KKN Nalarasa UIN Salatiga menyelenggarakan kegiatan Sosialisasi Pemeliharaan Arsip 
+            Keluarga pada Kamis (15/10/2026), mulai pukul 09.40 WIB.
+        </p>
+
+        <a href="berita3.html" class="b-link">
+            Baca selengkapnya
+        </a>
+    </div>
+</article>
+    </div>
+  </div>
+</section>
+
+<section id="kontak">
+  <div class="wrap kontak-grid">
+    <div class="kontak-info">
+      <p class="s-label">Sampaikan Pesan</p>
+      <h2 class="s-title">Hubungi Kami</h2>
+      <p style="margin-top:1rem;">Ada pertanyaan, undangan kegiatan, atau ingin berkolaborasi dengan KKN Nalarasa? Tinggalkan pesan, kami akan segera membalas.</p>
+      <div class="k-item"><div class="k-icon">📍</div><div><h5>Posko KKN Nalarasa</h5><p>Desa Ujung-ujung, Kec. Pabelan, Kab. Semarang Jawa Tengah</p></div></div>
+      <div class="k-item"><div class="k-icon">✉️</div><div><h5>Email</h5><p>kknnalarasa@gmail.com</p></div></div>
+      <div class="k-item"><div class="k-icon">📞</div><div><h5>WhatsApp</h5><p>+62 812-3456-7890</p></div></div>
+    </div>
+    <form class="k-form" id="contactForm">
+      <div class="f-row">
+        <div class="f-group"><label for="nm">Nama</label><input type="text" id="nm" placeholder="Nama lengkap" required></div>
+        <div class="f-group"><label for="em">Email</label><input type="email" id="em" placeholder="email@contoh.com" required></div>
+      </div>
+      <div class="f-group"><label for="sb">Subjek</label><input type="text" id="sb" placeholder="Tentang apa pesan ini?"></div>
+      <div class="f-group"><label for="ms">Pesan</label><textarea id="ms" rows="4" placeholder="Tulis pesan Anda..." required></textarea></div>
+      <button type="submit" class="f-submit">Kirim Pesan</button>
+      <p class="f-note" id="formNote">Terima kasih, pesan Anda telah tercatat.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+    <a href="index.html" class="f-brand">
+        <img src="logo.jpeg" alt="Logo KKN Nalarasa" class="logo">
+        <span>KKN Nalarasa</span></a>
+    <p>
+        Kelompok Kuliah Kerja Nyata di Desa Ujung-ujung merajut nalar dan rasa untuk pembangunan desa yang berkelanjutan.
+    </p>
+</div>
+      <div class="f-col">
+        <h5>Navigasi</h5>
+        <a href="index.html">Beranda</a>
+        <a href="profil.html">Profil</a>
+        <a href="program.html">Program Kerja</a>
+        <a href="berita page.html">Berita</a>
+      </div>
+      <div class="f-col">
+        <h5>Kontak</h5>
+        <li>Desa Ujung-ujung, Kec. Pabelan, Kab. Semarang Jawa Tengah</li>
+        <li>Instagram: @ppm.nalarasa</li>
+        <li>TikTok: @kkn.nalarasa.2026</li>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>© <span id="year"></span> KKN Nalarasa · Desa Ujung-ujung</p>
+      <a href="index.html">Kembali ke atas ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const toggle = document.getElementById('navToggle');
+const links = document.getElementById('navLinks');
+toggle.addEventListener('click', () => links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formNote').style.display = 'block';
+  this.reset();
+});
+</script>
+</body>
+</html>

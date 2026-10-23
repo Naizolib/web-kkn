@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | KKN Nalarasa</title>
+
+    <style>
+        :root {
+            --green-dark: #173f35;
+            --green: #285c4d;
+            --green-soft: #477a68;
+            --gold: #c6a15b;
+            --gold-soft: #e1c98b;
+            --bg: #f5f1e5;
+            --surface: #fffdf7;
+            --ink: #20352e;
+            --ink-soft: #718078;
+            --border: #ddd8c9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+        }
+
+        /* =========================
+           LOGIN PAGE
+        ========================= */
+
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 15% 20%,
+                    rgba(198, 161, 91, 0.18),
+                    transparent 28%),
+                radial-gradient(circle at 85% 80%,
+                    rgba(71, 122, 104, 0.18),
+                    transparent 30%),
+                var(--bg);
+        }
+
+        /* Dekorasi background */
+
+        .login-page::before,
+        .login-page::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .login-page::before {
+            width: 300px;
+            height: 300px;
+            background: rgba(40, 92, 77, 0.08);
+            top: -120px;
+            left: -100px;
+        }
+
+        .login-page::after {
+            width: 350px;
+            height: 350px;
+            background: rgba(198, 161, 91, 0.08);
+            right: -130px;
+            bottom: -150px;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .login-card {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            max-width: 430px;
+
+            background: rgba(255, 253, 247, 0.96);
+            border: 1px solid rgba(40, 92, 77, 0.12);
+
+            border-radius: 24px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 25px 60px rgba(23, 63, 53, 0.14);
+
+            animation: loginUp 0.7s ease;
+        }
+
+        @keyframes loginUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .login-logo img {
+            width: 78px;
+            height: 78px;
+            object-fit: cover;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 25px rgba(23, 63, 53, 0.18);
+
+            margin-bottom: 18px;
+        }
+
+        .login-logo h1 {
+            font-size: 25px;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 7px;
+        }
+
+        .login-logo p {
+            font-size: 14px;
+            color: var(--ink-soft);
+            line-height: 1.5;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 52px;
+
+            padding: 0 17px;
+
+            border: 1.5px solid var(--border);
+            border-radius: 13px;
+
+            background: #ffffff;
+
+            color: var(--ink);
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s ease;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #a1aaa4;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--green);
+            box-shadow:
+                0 0 0 4px rgba(40, 92, 77, 0.09);
+        }
+
+        /* Password */
+
+        .password-input {
+            padding-right: 52px !important;
+        }
+
+        .toggle-password {
+            position: absolute;
+
+            right: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: var(--ink-soft);
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        .toggle-password:hover {
+            color: var(--green);
+        }
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin: 5px 0 22px;
+
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            color: var(--ink-soft);
+        }
+
+        .remember input {
+            accent-color: var(--green);
+        }
+
+        .forgot {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .forgot:hover {
+            color: var(--gold);
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .btn-login {
+            width: 100%;
+            height: 52px;
+
+            border: none;
+            border-radius: 13px;
+
+            background: var(--green-dark);
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: -100%;
+
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.18),
+                transparent
+            );
+
+            transition: 0.5s;
+        }
+
+        .btn-login:hover {
+            background: var(--green);
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 22px rgba(23, 63, 53, 0.2);
+        }
+
+        .btn-login:hover::before {
+            left: 100%;
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back-home {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 23px;
+
+            color: var(--ink-soft);
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+        .back-home span {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .back-home:hover span {
+            color: var(--gold);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .login-footer {
+            position: absolute;
+
+            bottom: 18px;
+            left: 0;
+            width: 100%;
+
+            text-align: center;
+
+            color: var(--ink-soft);
+
+            font-size: 11px;
+
+            z-index: 1;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .login-page {
+                padding: 20px 15px;
+            }
+
+            .login-card {
+                padding: 32px 24px;
+                border-radius: 20px;
+            }
+
+            .login-logo img {
+                width: 68px;
+                height: 68px;
+            }
+
+            .login-logo h1 {
+                font-size: 22px;
+            }
+
+            .login-footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <div class="login-card">
+
+            <!-- LOGO -->
+            <div class="login-logo">
+
+                <img
+                    src="logo.jpeg"
+                    alt="Logo KKN Nalarasa">
+
+                <h1>Selamat Datang</h1>
+
+                <p>
+                    Masuk ke ruang KKN Nalarasa
+                </p>
+
+            </div>
+
+
+            <!-- FORM LOGIN -->
+            <form id="loginForm">
+
+                <!-- USERNAME -->
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Masukkan username"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="password-input"
+                            placeholder="Masukkan password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="togglePassword">
+                            Lihat
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPTIONS -->
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember">
+
+                        <span>Ingat saya</span>
+
+                    </label>
+
+                    <a href="#" class="forgot">
+                        Lupa password?
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+                <button
+                    type="submit"
+                    class="btn-login">
+
+                    Masuk
+
+                </button>
+
+            </form>
+
+
+            <!-- BACK -->
+            <a href="index.html" class="back-home">
+                ← Kembali ke <span>Beranda</span>
+            </a>
+
+        </div>
+
+
+        <div class="login-footer">
+            © 2026 KKN Nalarasa · Desa Ujung-ujung
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* SHOW / HIDE PASSWORD */
+
+        const password = document.getElementById("password");
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                togglePassword.textContent = "Sembunyikan";
+
+            } else {
+
+                password.type = "password";
+                togglePassword.textContent = "Lihat";
+
+            }
+
+        });
+
+
+        /* LOGIN */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(e) {
+
+                e.preventDefault();
+
+                const username =
+                    document.getElementById("username").value;
+
+                const passwordValue =
+                    document.getElementById("password").value;
+
+                if (!username || !passwordValue) {
+                    return;
+                }
+
+                /*
+                 * LOGIN SEMENTARA
+                 * Belum terhubung database.
+                 */
+
+                alert("Login berhasil!");
+
+                window.location.href = "index.html";
+
+            });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Program Kerja - KKN Nalarasa</title>
+
+    <style>
+
+        /* =========================
+           ROOT
+        ========================= */
+
+        :root{
+            --bg:#F7F5EC;
+            --surface:#F1EFE4;
+            --ink:#18392B;
+            --ink-soft:#68746C;
+            --green:#527A61;
+            --green-dark:#18392B;
+            --gold:#D9B85B;
+            --gold-soft:#E8D9A8;
+            --border:#DDDCCF;
+
+            --radius:18px;
+
+            --font-body:Arial,sans-serif;
+            --font-display:Georgia,serif;
+        }
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:var(--bg);
+            color:var(--ink);
+            font-family:var(--font-body);
+            line-height:1.6;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        .wrap{
+            max-width:1120px;
+            width:calc(100% - 40px);
+            margin:0 auto;
+        }
+
+
+        /* =========================
+           NAV
+        ========================= */
+
+        nav{
+            position:sticky;
+            top:0;
+            z-index:50;
+            width:100%;
+            background:color-mix(in srgb,var(--bg) 88%,transparent);
+            backdrop-filter:blur(10px);
+            border-bottom:1px solid var(--border);
+        }
+
+        .nav-inner{
+            max-width:1120px;
+            margin:0 auto;
+            padding:0.9rem 1.5rem;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+
+        .brand{
+            display:flex;
+            align-items:center;
+            gap:0.6rem;
+            color:var(--ink);
+            text-decoration:none;
+            font-family:var(--font-display);
+            font-weight:700;
+            font-size:1.2rem;
+        }
+
+        .brand .logo{
+            width:36px;
+            height:36px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap:1.9rem;
+        }
+
+        .nav-links a{
+            color:var(--ink-soft);
+            text-decoration:none;
+            font-size:0.92rem;
+        }
+
+        .nav-links a:hover{
+            color:var(--green);
+        }
+
+        .nav-login{
+            border:1.5px solid var(--ink);
+            padding:0.5rem 1.2rem;
+            border-radius:100px;
+            font-size:0.88rem !important;
+            font-weight:600;
+        }
+
+        .nav-login:hover{
+            background:var(--ink);
+            color:var(--bg) !important;
+        }
+
+        .nav-toggle{
+            display:none;
+            flex-direction:column;
+            gap:4px;
+            background:none;
+            border:none;
+            cursor:pointer;
+        }
+
+        .nav-toggle span{
+            width:22px;
+            height:2px;
+            background:var(--ink);
+        }
+
+
+        /* =========================
+           HERO PROGRAM
+        ========================= */
+
+        .program-hero{
+            padding:6rem 0 5rem;
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(217,184,91,0.13),
+                    transparent 28%
+                ),
+                var(--bg);
+        }
+
+        .program-hero-grid{
+            display:grid;
+            grid-template-columns:1fr 0.9fr;
+            gap:4rem;
+            align-items:center;
+        }
+
+        .hero-label{
+            display:inline-block;
+            color:var(--green);
+            font-size:0.78rem;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:0.12em;
+            margin-bottom:0.8rem;
+        }
+
+        .program-hero h1{
+            font-family:var(--font-display);
+            font-size:clamp(2.5rem,5vw,4.5rem);
+            line-height:1.05;
+            margin-bottom:1.2rem;
+        }
+
+        .program-hero h1 span{
+            color:var(--green);
+        }
+
+        .program-hero p{
+            color:var(--ink-soft);
+            max-width:600px;
+            line-height:1.8;
+        }
+
+        .hero-image{
+            position:relative;
+        }
+
+        .hero-image img{
+            width:100%;
+            height:400px;
+            object-fit:cover;
+            display:block;
+            border-radius:24px;
+        }
+
+        .hero-tag{
+            position:absolute;
+            bottom:20px;
+            left:20px;
+            background:var(--green-dark);
+            color:#EDE9D8;
+            padding:0.8rem 1rem;
+            border-radius:12px;
+            font-size:0.82rem;
+        }
+
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .program-intro{
+            padding:5rem 0;
+            background:var(--surface);
+            border-top:1px solid var(--border);
+            border-bottom:1px solid var(--border);
+        }
+
+        .intro-grid{
+            display:grid;
+            grid-template-columns:0.8fr 1.2fr;
+            gap:4rem;
+            align-items:start;
+        }
+
+        .section-label{
+            color:var(--green);
+            font-size:0.75rem;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:0.1em;
+            margin-bottom:0.7rem;
+        }
+
+        .section-title{
+            font-family:var(--font-display);
+            font-size:clamp(2rem,4vw,3rem);
+            line-height:1.15;
+        }
+
+        .intro-text p{
+            color:var(--ink-soft);
+            line-height:1.8;
+            margin-bottom:1rem;
+        }
+
+
+        /* =========================
+           PROGRAM KERJA
+        ========================= */
+
+        .program-list{
+            padding:5rem 0;
+        }
+
+        .program-head{
+            max-width:700px;
+            margin-bottom:3rem;
+        }
+
+        .program-head p:last-child{
+            color:var(--ink-soft);
+            line-height:1.8;
+        }
+
+        .program-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:1.5rem;
+        }
+
+        .program-card{
+            background:white;
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            overflow:hidden;
+            transition:0.25s;
+        }
+
+        .program-card:hover{
+            border-color:var(--green);
+            transform:translateY(-4px);
+            box-shadow:0 12px 25px rgba(24,57,43,0.07);
+        }
+
+        .program-image{
+            width:100%;
+            height:230px;
+            overflow:hidden;
+        }
+
+        .program-image img{
+            width:100%;
+            height:100%;
+            display:block;
+            object-fit:cover;
+            object-position:center;
+        }
+
+        .program-content{
+            padding:1.5rem;
+        }
+
+        .program-number{
+            color:var(--gold);
+            font-family:var(--font-display);
+            font-size:1rem;
+            font-weight:700;
+            margin-bottom:0.5rem;
+        }
+
+        .program-content h3{
+            font-family:var(--font-display);
+            font-size:1.35rem;
+            line-height:1.3;
+            margin-bottom:0.7rem;
+        }
+
+        .program-content p{
+            color:var(--ink-soft);
+            font-size:0.9rem;
+            line-height:1.7;
+            margin-bottom:1rem;
+        }
+
+        .program-meta{
+            display:flex;
+            flex-wrap:wrap;
+            gap:0.5rem;
+        }
+
+        .program-meta span{
+            background:var(--surface);
+            color:var(--green);
+            padding:0.35rem 0.7rem;
+            border-radius:100px;
+            font-size:0.72rem;
+            font-weight:600;
+        }
+
+
+        /* =========================
+           NILAI PROGRAM
+        ========================= */
+
+        .program-values{
+            padding:5rem 0;
+            background:var(--green-dark);
+            color:#EDE9D8;
+        }
+
+        .values-head{
+            text-align:center;
+            max-width:700px;
+            margin:0 auto 3rem;
+        }
+
+        .values-head .section-label{
+            color:var(--gold);
+        }
+
+        .values-head h2{
+            font-family:var(--font-display);
+            font-size:clamp(2rem,4vw,3rem);
+            margin-bottom:1rem;
+        }
+
+        .values-head p{
+            color:#C9C4AE;
+        }
+
+        .values-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:1rem;
+        }
+
+        .value-card{
+            padding:1.5rem;
+            border:1px solid rgba(237,233,216,0.15);
+            border-radius:16px;
+        }
+
+        .value-card strong{
+            display:block;
+            color:var(--gold);
+            font-family:var(--font-display);
+            font-size:1.2rem;
+            margin-bottom:0.5rem;
+        }
+
+        .value-card h3{
+            font-size:1rem;
+            margin-bottom:0.4rem;
+        }
+
+        .value-card p{
+            color:#BEB9A5;
+            font-size:0.82rem;
+        }
+
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .program-cta{
+            padding:5rem 0;
+        }
+
+        .cta-box{
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:24px;
+            padding:3.5rem;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:2rem;
+        }
+
+        .cta-box h2{
+            font-family:var(--font-display);
+            font-size:2rem;
+            margin-bottom:0.5rem;
+        }
+
+        .cta-box p{
+            color:var(--ink-soft);
+            max-width:600px;
+        }
+
+        .cta-button{
+            display:inline-block;
+            background:var(--green);
+            color:white;
+            padding:0.8rem 1.3rem;
+            border-radius:100px;
+            font-size:0.88rem;
+            font-weight:600;
+            white-space:nowrap;
+        }
+
+        .cta-button:hover{
+            background:var(--green-dark);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer{
+            background:var(--green-dark);
+            color:#EDE9D8;
+            padding:3.5rem 0 1.5rem;
+            padding-bottom:calc(
+                1.5rem + env(safe-area-inset-bottom,0px)
+            );
+        }
+
+        .f-grid{
+            display:grid;
+            grid-template-columns:1.3fr 0.8fr 1fr;
+            gap:2.5rem;
+            margin-bottom:2.5rem;
+        }
+
+        .f-brand{
+            display:flex;
+            align-items:center;
+            gap:0.6rem;
+            font-family:var(--font-display);
+            font-weight:700;
+            font-size:1.15rem;
+            margin-bottom:0.9rem;
+            color:#EDE9D8;
+        }
+
+        .f-brand .logo{
+            width:36px;
+            height:36px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        .f-grid p{
+            font-size:0.87rem;
+            color:#C9C4AE;
+            max-width:32ch;
+        }
+
+        .f-col h5{
+            font-size:0.85rem;
+            text-transform:uppercase;
+            letter-spacing:0.04em;
+            color:#EDE9D8;
+            margin-bottom:0.9rem;
+            font-family:var(--font-body);
+            font-weight:700;
+        }
+
+        .f-col a,
+        .f-col li{
+            display:block;
+            font-size:0.87rem;
+            color:#C9C4AE;
+            margin-bottom:0.6rem;
+        }
+
+        .f-col a:hover{
+            color:var(--gold);
+        }
+
+        .f-bottom{
+            border-top:1px solid rgba(237,233,216,0.15);
+            padding-top:1.5rem;
+            display:flex;
+            justify-content:space-between;
+            flex-wrap:wrap;
+            gap:0.8rem;
+            font-size:0.8rem;
+            color:#B4AF98;
+        }
+
+        .f-bottom a{
+            color:#B4AF98;
+        }
+
+        .f-bottom a:hover{
+            color:var(--gold);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:850px){
+
+            .program-hero-grid,
+            .intro-grid{
+                grid-template-columns:1fr;
+            }
+
+            .hero-image{
+                order:-1;
+            }
+
+            .program-grid{
+                grid-template-columns:1fr;
+            }
+
+            .values-grid{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .f-grid{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .cta-box{
+                flex-direction:column;
+                align-items:flex-start;
+            }
+        }
+
+
+        @media(max-width:650px){
+
+            .nav-inner{
+                padding:0.8rem 1rem;
+            }
+
+            .brand{
+                font-size:1rem;
+            }
+
+            .nav-links{
+                position:absolute;
+                top:100%;
+                left:0;
+                width:100%;
+                background:var(--bg);
+                border-bottom:1px solid var(--border);
+                padding:1rem 1.2rem;
+                display:none;
+                flex-direction:column;
+                align-items:stretch;
+                gap:0;
+            }
+
+            .nav-links.active{
+                display:flex;
+            }
+
+            .nav-links a{
+                padding:0.75rem 0;
+            }
+
+            .nav-login{
+                text-align:center;
+                margin-top:0.4rem;
+            }
+
+            .nav-toggle{
+                display:flex;
+            }
+
+            .program-hero{
+                padding:3.5rem 0 4rem;
+            }
+
+            .program-hero h1{
+                font-size:2.7rem;
+            }
+
+            .hero-image img{
+                height:280px;
+            }
+
+            .program-intro,
+            .program-list,
+            .program-values,
+            .program-cta{
+                padding:4rem 0;
+            }
+
+            .values-grid{
+                grid-template-columns:1fr;
+            }
+
+            .cta-box{
+                padding:2rem;
+            }
+
+            .f-grid{
+                grid-template-columns:1fr;
+                gap:2rem;
+            }
+
+            .f-bottom{
+                flex-direction:column;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav>
+
+    <div class="nav-inner">
+
+        <a href="index.html" class="brand">
+
+            <img
+                src="logo.jpeg"
+                alt="Logo KKN Nalarasa"
+                class="logo">
+
+            <span>KKN NALARASA</span>
+
+        </a>
+
+
+        <div class="nav-links" id="navLinks">
+
+            <a href="index.html">
+                Beranda
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="program.html">
+                Program Kerja
+            </a>
+
+            <a href="berita page.html">
+                Berita
+            </a>
+
+            <a href="kontak.html">
+                Kontak
+            </a>
+
+            <a href="login.html" class="nav-login">
+                Masuk
+            </a>
+
+        </div>
+
+
+        <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Buka menu">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="program-hero">
+
+    <div class="wrap">
+
+        <div class="program-hero-grid">
+
+
+            <div>
+
+                <span class="hero-label">
+                    Program Kerja
+                </span>
+
+                <h1>
+                    Bergerak Bersama,
+                    <span>Memberi Makna.</span>
+                </h1>
+
+                <p>
+                    Program kerja KKN Nalarasa menjadi bagian dari
+                    rangkaian kegiatan pengabdian mahasiswa di
+                    Desa Ujung-ujung. Setiap kegiatan dirancang
+                    dengan semangat kolaborasi dan menyesuaikan
+                    kebutuhan serta potensi lingkungan masyarakat.
+                </p>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <img
+                    src="nata buku.jpeg"
+                    alt="Kegiatan Program Kerja KKN Nalarasa">
+
+                <div class="hero-tag">
+                    KKN Nalarasa · Desa Ujung-ujung
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="program-intro">
+
+    <div class="wrap">
+
+        <div class="intro-grid">
+
+
+            <div>
+
+                <p class="section-label">
+                    Tentang Program
+                </p>
+
+                <h2 class="section-title">
+                    Dari ide menjadi aksi.
+                </h2>
+
+            </div>
+
+
+            <div class="intro-text">
+
+                <p>
+                    Program kerja merupakan salah satu bagian
+                    penting dalam pelaksanaan KKN Nalarasa.
+                    Melalui program yang disusun, mahasiswa dapat
+                    mengembangkan gagasan sekaligus berinteraksi
+                    secara langsung dengan masyarakat.
+                </p>
+
+                <p>
+                    Kegiatan tidak hanya berorientasi pada
+                    pelaksanaan program, tetapi juga pada proses
+                    membangun komunikasi, kerja sama, dan
+                    pengalaman bersama masyarakat Desa Ujung-ujung.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DAFTAR PROGRAM KERJA
+===================================================== -->
+
+<section class="program-list" id="program">
+
+    <div class="wrap">
+
+
+        <div class="program-head">
+
+            <p class="section-label">
+                Kegiatan Kami
+            </p>
+
+            <h2 class="section-title">
+                Program Kerja KKN Nalarasa
+            </h2>
+
+            <p>
+                Berikut merupakan contoh susunan program kerja
+                yang dapat ditampilkan pada halaman ini. Nama,
+                foto, dan deskripsi dapat disesuaikan dengan
+                program kerja asli kelompok KKN Nalarasa.
+            </p>
+
+        </div>
+
+
+        <div class="program-grid">
+
+
+            <!-- PROGRAM 01 -->
+
+            <article class="program-card">
+
+                <div class="program-image">
+
+                    <img
+                        src="momen1.jpeg"
+                        alt="Program kerja pendidikan">
+
+                </div>
+
+                <div class="program-content">
+
+                    <div class="program-number">
+                        PROGRAM 01
+                    </div>
+
+                    <h3>
+                        Pendidikan dan Literasi
+                    </h3>
+
+                    <p>
+                        Kegiatan yang berfokus pada peningkatan
+                        minat belajar, literasi, dan pendampingan
+                        pendidikan bagi masyarakat.
+                    </p>
+
+                    <div class="program-meta">
+
+                        <span>
+                            Pendidikan
+                        </span>
+
+                        <span>
+                            Masyarakat
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROGRAM 02 -->
+
+            <article class="program-card">
+
+                <div class="program-image">
+
+                    <img
+                        src="momen2.jpeg"
+                        alt="Program kerja lingkungan">
+
+                </div>
+
+                <div class="program-content">
+
+                    <div class="program-number">
+                        PROGRAM 02
+                    </div>
+
+                    <h3>
+                        Lingkungan dan Kebersihan
+                    </h3>
+
+                    <p>
+                        Kegiatan yang mengajak masyarakat untuk
+                        menjaga kebersihan lingkungan serta
+                        meningkatkan kepedulian terhadap kondisi
+                        lingkungan sekitar.
+                    </p>
+
+                    <div class="program-meta">
+
+                        <span>
+                            Lingkungan
+                        </span>
+
+                        <span>
+                            Kebersihan
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROGRAM 03 -->
+
+            <article class="program-card">
+
+                <div class="program-image">
+
+                    <img
+                        src="momen3.jpeg"
+                        alt="Program kerja masyarakat">
+
+                </div>
+
+                <div class="program-content">
+
+                    <div class="program-number">
+                        PROGRAM 03
+                    </div>
+
+                    <h3>
+                        Pemberdayaan Masyarakat
+                    </h3>
+
+                    <p>
+                        Kegiatan yang mendorong keterlibatan
+                        masyarakat dalam mengembangkan potensi
+                        dan sumber daya yang tersedia di desa.
+                    </p>
+
+                    <div class="program-meta">
+
+                        <span>
+                            Pemberdayaan
+                        </span>
+
+                        <span>
+                            Potensi Lokal
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROGRAM 04 -->
+
+            <article class="program-card">
+
+                <div class="program-image">
+
+                    <img
+                        src="momen4.jpeg"
+                        alt="Program kerja ekonomi">
+
+                </div>
+
+                <div class="program-content">
+
+                    <div class="program-number">
+                        PROGRAM 04
+                    </div>
+
+                    <h3>
+                        Ekonomi Kreatif
+                    </h3>
+
+                    <p>
+                        Kegiatan yang mendukung pengembangan
+                        kreativitas dan potensi usaha masyarakat
+                        melalui pemanfaatan sumber daya lokal.
+                    </p>
+
+                    <div class="program-meta">
+
+                        <span>
+                            UMKM
+                        </span>
+
+                        <span>
+                            Ekonomi
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROGRAM 05 -->
+
+            <article class="program-card">
+
+                <div class="program-image">
+
+                    <img
+                        src="momen1.jpeg"
+                        alt="Program kerja kesehatan">
+
+                </div>
+
+                <div class="program-content">
+
+                    <div class="program-number">
+                        PROGRAM 05
+                    </div>
+
+                    <h3>
+                        Kesehatan Masyarakat
+                    </h3>
+
+                    <p>
+                        Kegiatan yang mendukung peningkatan
+                        kesadaran masyarakat terhadap pola hidup
+                        sehat dan lingkungan yang bersih.
+                    </p>
+
+                    <div class="program-meta">
+
+                        <span>
+                            Kesehatan
+                        </span>
+
+                        <span>
+                            Edukasi
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROGRAM 06 -->
+
+            <article class="program-card">
+
+                <div class="program-image">
+
+                    <img
+                        src="momen2.jpeg"
+                        alt="Program kerja sosial">
+
+                </div>
+
+                <div class="program-content">
+
+                    <div class="program-number">
+                        PROGRAM 06
+                    </div>
+
+                    <h3>
+                        Sosial dan Kemasyarakatan
+                    </h3>
+
+                    <p>
+                        Kegiatan yang membangun interaksi dan
+                        kebersamaan antara mahasiswa dengan
+                        masyarakat Desa Ujung-ujung.
+                    </p>
+
+                    <div class="program-meta">
+
+                        <span>
+                            Sosial
+                        </span>
+
+                        <span>
+                            Kebersamaan
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NILAI PROGRAM
+===================================================== -->
+
+<section class="program-values">
+
+    <div class="wrap">
+
+
+        <div class="values-head">
+
+            <p class="section-label">
+                Prinsip Kegiatan
+            </p>
+
+            <h2>
+                Setiap program punya makna.
+            </h2>
+
+            <p>
+                Program kerja KKN Nalarasa diarahkan untuk
+                menjadi kegiatan yang dapat memberikan
+                pengalaman bagi mahasiswa sekaligus membangun
+                interaksi bersama masyarakat.
+            </p>
+
+        </div>
+
+
+        <div class="values-grid">
+
+
+            <div class="value-card">
+
+                <strong>
+                    01
+                </strong>
+
+                <h3>
+                    Kolaboratif
+                </h3>
+
+                <p>
+                    Mengutamakan kerja sama dalam pelaksanaan
+                    kegiatan.
+                </p>
+
+            </div>
+
+
+            <div class="value-card">
+
+                <strong>
+                    02
+                </strong>
+
+                <h3>
+                    Partisipatif
+                </h3>
+
+                <p>
+                    Mendorong keterlibatan masyarakat dalam
+                    kegiatan.
+                </p>
+
+            </div>
+
+
+            <div class="value-card">
+
+                <strong>
+                    03
+                </strong>
+
+                <h3>
+                    Kontekstual
+                </h3>
+
+                <p>
+                    Menyesuaikan kegiatan dengan kondisi dan
+                    potensi desa.
+                </p>
+
+            </div>
+
+
+            <div class="value-card">
+
+                <strong>
+                    04
+                </strong>
+
+                <h3>
+                    Berkelanjutan
+                </h3>
+
+                <p>
+                    Mengupayakan kegiatan agar memberikan
+                    manfaat yang dapat diteruskan.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="program-cta">
+
+    <div class="wrap">
+
+        <div class="cta-box">
+
+            <div>
+
+                <h2>
+                    Kenali lebih dekat kegiatan kami.
+                </h2>
+
+                <p>
+                    Lihat berbagai dokumentasi kegiatan dan
+                    kabar terbaru KKN Nalarasa selama berada
+                    di Desa Ujung-ujung.
+                </p>
+
+            </div>
+
+            <a
+                href="berita page.html"
+                class="cta-button">
+
+                Lihat Berita →
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="wrap">
+
+        <div class="f-grid">
+
+
+            <div>
+
+                <a
+                    href="index.html"
+                    class="f-brand">
+
+                    <img
+                        src="logo.jpeg"
+                        alt="Logo KKN Nalarasa"
+                        class="logo">
+
+                    <span>
+                        KKN Nalarasa
+                    </span>
+
+                </a>
+
+                <p>
+                    Kelompok Kuliah Kerja Nyata di Desa Ujung-ujung
+                    merajut nalar dan rasa untuk pembangunan desa
+                    yang berkelanjutan.
+                </p>
+
+            </div>
+
+
+            <div class="f-col">
+
+                <h5>
+                    Navigasi
+                </h5>
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="profil.html">
+                    Profil
+                </a>
+
+                <a href="program.html">
+                    Program Kerja
+                </a>
+
+                <a href="berita page.html">
+                    Berita
+                </a>
+                
+
+            </div>
+
+
+            <div class="f-col">
+
+                <h5>
+                    Kontak
+                </h5>
+
+                <li>
+                    Desa Ujung-ujung, Kec. Pabelan,
+                    Kab. Semarang Jawa Tengah
+                </li>
+
+                <li>
+                    Instagram: @ppm.nalarasa
+                </li>
+
+                <li>
+                    TikTok: @kkn.nalarasa.2026
+                </li>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="f-bottom">
+
+            <p>
+                © <span id="year"></span>
+                KKN Nalarasa · Desa Ujung-ujung
+            </p>
+
+            <a href="index.html">
+                Kembali ke atas ↑
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+    /* Tahun otomatis */
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    /* Menu mobile */
+
+    const navToggle =
+        document.getElementById("navToggle");
+
+    const navLinks =
+        document.getElementById("navLinks");
+
+
+    navToggle.addEventListener("click", function(){
+
+        navLinks.classList.toggle("active");
+
+    });
+
+</script>
+
+
+</body>
+</html>

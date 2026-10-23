@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profil KKN Nalarasa</title>
+
+    <style>
+
+        /* =========================
+           ROOT
+        ========================= */
+
+        :root{
+            --bg:#F7F5EC;
+            --surface:#F1EFE4;
+            --ink:#18392B;
+            --ink-soft:#68746C;
+            --green:#527A61;
+            --green-dark:#18392B;
+            --gold:#D9B85B;
+            --gold-soft:#E8D9A8;
+            --border:#DDDCCF;
+
+            --radius:18px;
+
+            --font-body:Arial,sans-serif;
+            --font-display:Georgia,serif;
+        }
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:var(--bg);
+            color:var(--ink);
+            font-family:var(--font-body);
+            line-height:1.6;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        .wrap{
+            max-width:1120px;
+            width:calc(100% - 40px);
+            margin:0 auto;
+        }
+
+
+        /* =========================
+           NAV
+        ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* LOGO + NAMA */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--ink);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .brand .logo {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* MENU */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.9rem;
+        }
+
+        .nav-links a {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 0.92rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        /* TOMBOL MASUK */
+
+        .nav-login {
+            border: 1.5px solid var(--ink);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.88rem !important;
+            font-weight: 600;
+        }
+
+        .nav-login:hover {
+            background: var(--ink);
+            color: var(--bg) !important;
+        }
+
+        /* MENU MOBILE */
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--ink);
+        }
+
+
+        /* =========================
+           HERO PROFIL
+        ========================= */
+
+        .profile-hero{
+            padding:6rem 0 5rem;
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(217,184,91,0.13),
+                    transparent 28%
+                ),
+                var(--bg);
+        }
+
+        .profile-hero-grid{
+            display:grid;
+            grid-template-columns:1.05fr 0.95fr;
+            gap:4rem;
+            align-items:center;
+        }
+
+        .hero-label{
+            display:inline-block;
+            color:var(--green);
+            font-size:0.78rem;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:0.12em;
+            margin-bottom:0.8rem;
+        }
+
+        .profile-hero h1{
+            font-family:var(--font-display);
+            font-size:clamp(2.5rem,5vw,4.5rem);
+            line-height:1.05;
+            margin-bottom:1.2rem;
+            color:var(--ink);
+        }
+
+        .profile-hero h1 span{
+            color:var(--green);
+        }
+
+        .profile-hero p{
+            color:var(--ink-soft);
+            max-width:580px;
+            font-size:1rem;
+            line-height:1.8;
+        }
+
+        
+/* HERO IMAGE */
+.hero-image {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 24px;
+}
+
+/* BADGE */
+.hero-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: var(--green-dark);
+    color: #EDE9D8;
+    padding: 1rem 1.3rem;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(24, 57, 43, 0.15);
+}
+
+/* TABLET */
+@media (max-width: 850px) {
+    .hero-image img {
+        max-height: 420px;
+    }
+}
+
+/* HP */
+@media (max-width: 650px) {
+    .hero-image img {
+        max-height: 320px;
+    }
+
+    .hero-badge {
+        bottom: 12px;
+        left: 12px;
+        padding: 0.8rem 1rem;
+    }
+}
+
+
+
+        /* =========================
+           TENTANG
+        ========================= */
+
+        .about{
+            padding:5rem 0;
+            background:var(--surface);
+            border-top:1px solid var(--border);
+            border-bottom:1px solid var(--border);
+        }
+
+        .section-label{
+            color:var(--green);
+            font-size:0.75rem;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:0.1em;
+            margin-bottom:0.7rem;
+        }
+
+        .section-title{
+            font-family:var(--font-display);
+            font-size:clamp(2rem,4vw,3rem);
+            line-height:1.15;
+            margin-bottom:1rem;
+        }
+
+        .about-grid{
+            display:grid;
+            grid-template-columns:0.85fr 1.15fr;
+            gap:4rem;
+            align-items:start;
+        }
+
+        .about-intro p{
+            color:var(--ink-soft);
+            font-size:0.95rem;
+            line-height:1.8;
+        }
+
+        .about-text p{
+            color:var(--ink-soft);
+            margin-bottom:1rem;
+            line-height:1.8;
+        }
+
+
+        /* =========================
+           IDENTITAS
+        ========================= */
+
+        .identity{
+            padding:5rem 0;
+        }
+
+        .identity-head{
+            text-align:center;
+            max-width:700px;
+            margin:0 auto 3rem;
+        }
+
+        .identity-head p{
+            color:var(--ink-soft);
+        }
+
+        .identity-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:1.5rem;
+        }
+
+        .identity-card{
+            padding:1.8rem;
+            background:white;
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            transition:.2s;
+        }
+
+        .identity-card:hover{
+            border-color:var(--green);
+            transform:translateY(-3px);
+        }
+
+        .identity-icon{
+            width:45px;
+            height:45px;
+            border-radius:12px;
+            background:#E9EFE9;
+            color:var(--green);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:1.2rem;
+            margin-bottom:1rem;
+        }
+
+        .identity-card h3{
+            font-family:var(--font-display);
+            font-size:1.15rem;
+            margin-bottom:0.5rem;
+        }
+
+        .identity-card p{
+            color:var(--ink-soft);
+            font-size:0.87rem;
+        }
+
+
+        /* =========================
+           NILAI NALARASA
+        ========================= */
+
+        .values{
+            padding:5rem 0;
+            background:var(--green-dark);
+            color:#EDE9D8;
+        }
+
+        .values-grid{
+            display:grid;
+            grid-template-columns:0.8fr 1.2fr;
+            gap:4rem;
+            align-items:center;
+        }
+
+        .values .section-label{
+            color:var(--gold);
+        }
+
+        .values h2{
+            font-family:var(--font-display);
+            font-size:clamp(2rem,4vw,3rem);
+            line-height:1.15;
+            margin-bottom:1rem;
+        }
+
+        .values-intro{
+            color:#C9C4AE;
+            line-height:1.8;
+        }
+
+        .value-list{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:1rem;
+        }
+
+        .value-item{
+            border:1px solid rgba(237,233,216,0.15);
+            padding:1.3rem;
+            border-radius:15px;
+        }
+
+        .value-number{
+            color:var(--gold);
+            font-family:var(--font-display);
+            font-size:1.2rem;
+            margin-bottom:0.4rem;
+        }
+
+        .value-item h3{
+            font-size:1rem;
+            margin-bottom:0.35rem;
+        }
+
+        .value-item p{
+            color:#BEB9A5;
+            font-size:0.82rem;
+        }
+
+
+        /* =========================
+           TUJUAN
+        ========================= */
+
+        .purpose{
+            padding:5rem 0;
+        }
+
+        .purpose-head{
+            max-width:650px;
+            margin-bottom:2.5rem;
+        }
+
+        .purpose-head p{
+            color:var(--ink-soft);
+        }
+
+        .purpose-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:1.5rem;
+        }
+
+        .purpose-card{
+            border-top:3px solid var(--green);
+            padding:1.5rem;
+            background:white;
+            border-radius:0 0 var(--radius) var(--radius);
+        }
+
+        .purpose-card h3{
+            font-family:var(--font-display);
+            margin-bottom:0.5rem;
+        }
+
+        .purpose-card p{
+            color:var(--ink-soft);
+            font-size:0.87rem;
+        }
+
+
+        /* =========================
+           LOKASI
+        ========================= */
+
+        .location{
+            padding:5rem 0;
+            background:var(--surface);
+            border-top:1px solid var(--border);
+        }
+
+        .location-box{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            background:white;
+            border:1px solid var(--border);
+            border-radius:22px;
+            overflow:hidden;
+        }
+
+        .location-info{
+            padding:3rem;
+        }
+
+        .location-info h2{
+            font-family:var(--font-display);
+            font-size:2rem;
+            margin-bottom:1rem;
+        }
+
+        .location-info p{
+            color:var(--ink-soft);
+            margin-bottom:1rem;
+            line-height:1.8;
+        }
+
+        .location-detail{
+            margin-top:1.5rem;
+        }
+
+        .location-detail strong{
+            display:block;
+            color:var(--ink);
+            margin-bottom:0.2rem;
+        }
+
+        .location-detail span{
+            color:var(--ink-soft);
+            font-size:0.9rem;
+        }
+
+        .location-photo {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.location-photo iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer{
+            background:var(--green-dark);
+            color:#EDE9D8;
+            padding:3.5rem 0 1.5rem;
+            padding-bottom:calc(
+                1.5rem + env(safe-area-inset-bottom,0px)
+            );
+        }
+
+        .f-grid{
+            display:grid;
+            grid-template-columns:1.3fr 0.8fr 1fr;
+            gap:2.5rem;
+            margin-bottom:2.5rem;
+        }
+
+        .f-brand{
+            display:flex;
+            align-items:center;
+            gap:0.6rem;
+            font-family:var(--font-display);
+            font-weight:700;
+            font-size:1.15rem;
+            margin-bottom:0.9rem;
+            color:#EDE9D8;
+        }
+
+        .f-brand .logo{
+            width:36px;
+            height:36px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        .f-grid p{
+            font-size:0.87rem;
+            color:#C9C4AE;
+            max-width:32ch;
+        }
+
+        .f-col h5{
+            font-size:0.85rem;
+            text-transform:uppercase;
+            letter-spacing:0.04em;
+            color:#EDE9D8;
+            margin-bottom:0.9rem;
+            font-family:var(--font-body);
+            font-weight:700;
+        }
+
+        .f-col a,
+        .f-col li{
+            display:block;
+            font-size:0.87rem;
+            color:#C9C4AE;
+            margin-bottom:0.6rem;
+        }
+
+        .f-col a:hover{
+            color:var(--gold);
+        }
+
+        .f-bottom{
+            border-top:1px solid rgba(237,233,216,0.15);
+            padding-top:1.5rem;
+            display:flex;
+            justify-content:space-between;
+            flex-wrap:wrap;
+            gap:0.8rem;
+            font-size:0.8rem;
+            color:#B4AF98;
+        }
+
+        .f-bottom a{
+            color:#B4AF98;
+        }
+
+        .f-bottom a:hover{
+            color:var(--gold);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:850px){
+
+            .profile-hero-grid,
+            .about-grid,
+            .values-grid,
+            .location-box{
+                grid-template-columns:1fr;
+            }
+
+            .identity-grid,
+            .purpose-grid{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .hero-image{
+                order:-1;
+            }
+
+            .hero-image img{
+                height:350px;
+            }
+
+            .f-grid{
+                grid-template-columns:1fr 1fr;
+            }
+        }
+
+
+        @media(max-width:650px){
+
+            .nav-inner{
+                padding:0.8rem 1rem;
+            }
+
+            .brand{
+                font-size:1rem;
+            }
+
+            .nav-links{
+                position:absolute;
+                top:100%;
+                left:0;
+                width:100%;
+                background:var(--bg);
+                border-bottom:1px solid var(--border);
+                padding:1rem 1.2rem;
+                display:none;
+                flex-direction:column;
+                align-items:stretch;
+                gap:0;
+            }
+
+            .nav-links.active{
+                display:flex;
+            }
+
+            .nav-links a{
+                padding:0.75rem 0;
+            }
+
+            .nav-login{
+                text-align:center;
+                margin-top:0.4rem;
+            }
+
+            .nav-toggle{
+                display:flex;
+            }
+
+            .profile-hero{
+                padding:3.5rem 0 4rem;
+            }
+
+            .profile-hero h1{
+                font-size:2.7rem;
+            }
+
+            .hero-image img{
+                height:280px;
+            }
+
+            .hero-badge{
+                left:15px;
+            }
+
+            .about,
+            .identity,
+            .values,
+            .purpose,
+            .location{
+                padding:4rem 0;
+            }
+
+            .identity-grid,
+            .purpose-grid,
+            .value-list{
+                grid-template-columns:1fr;
+            }
+
+            .f-grid{
+                grid-template-columns:1fr;
+                gap:2rem;
+            }
+
+            .f-bottom{
+                flex-direction:column;
+            }
+
+            .location-info{
+                padding:2rem;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav>
+    <div class="nav-inner">
+
+        <a href="index.html" class="brand">
+            <img src="logo.jpeg"
+                 alt="Logo KKN Nalarasa"
+                 class="logo">
+
+            <span>KKN NALARASA</span>
+        </a>
+
+
+        <div class="nav-links" id="navLinks">
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="program.html">Program Kerja</a>
+    <a href="berita page.html">Berita</a>
+    <a href="kontak.html">Kontak</a>
+    <a href="login.html" class="nav-login">Masuk</a>
+</div>
+
+
+        <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Buka menu">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+</nav>
+
+
+
+<!-- =====================================================
+     HERO PROFIL
+===================================================== -->
+
+<section class="profile-hero">
+
+    <div class="wrap">
+
+        <div class="profile-hero-grid">
+
+            <div>
+
+                <span class="hero-label">
+                    Profil KKN Nalarasa
+                </span>
+
+                <h1>
+                    Merajut <span>Nalarasa
+                </h1>
+
+                <p>
+                    KKN Nalarasa merupakan kelompok mahasiswa yang
+                    melaksanakan Kuliah Kerja Nyata di Desa Ujung-ujung.
+                    Melalui semangat kolaborasi dan pengabdian,
+                    kami hadir untuk belajar bersama masyarakat,
+                    mengenali potensi lokal, serta ikut berkontribusi
+                    dalam berbagai kegiatan desa.
+                </p>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <img
+                    src="filosofi logo.jpeg"
+                    alt="Kegiatan KKN Nalarasa">
+
+                <div class="hero-badge">
+
+                    <strong>Nalarasa 2026</strong>
+
+                    <span>
+                        Desa Ujung-ujung
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TENTANG KKN
+===================================================== -->
+
+<section class="about">
+
+    <div class="wrap">
+
+        <div class="about-grid">
+
+            <div class="about-intro">
+
+                <p class="section-label">
+                    Tentang Kami
+                </p>
+
+                <h2 class="section-title">
+                    Mengenal KKN Nalarasa
+                </h2>
+
+            </div>
+
+
+            <div class="about-text">
+
+                <p>
+                    KKN Nalarasa adalah kelompok mahasiswa yang
+                    menjalankan kegiatan Kuliah Kerja Nyata di
+                    Desa Ujung-ujung. Kegiatan ini menjadi ruang
+                    bagi mahasiswa untuk menerapkan pengetahuan
+                    yang diperoleh selama perkuliahan sekaligus
+                    belajar memahami kehidupan masyarakat secara
+                    langsung.
+                </p>
+
+                <p>
+                    Nama Nalarasa menggambarkan semangat untuk
+                    memadukan pemikiran yang kritis dengan
+                    kepedulian terhadap lingkungan sekitar.
+                    Setiap kegiatan diupayakan untuk dibangun
+                    melalui komunikasi, kerja sama, dan
+                    keterlibatan bersama masyarakat.
+                </p>
+
+                <p>
+                    Melalui berbagai kegiatan dan program kerja,
+                    KKN Nalarasa berusaha menjadi bagian dari
+                    proses pengembangan potensi desa sekaligus
+                    memperoleh pengalaman berharga selama
+                    menjalankan pengabdian.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     IDENTITAS
+===================================================== -->
+
+<section class="identity">
+
+    <div class="wrap">
+
+        <div class="identity-head">
+
+            <p class="section-label">
+                Identitas
+            </p>
+
+            <h2 class="section-title">
+                Tentang Perjalanan Kami
+            </h2>
+
+            <p>
+                Beberapa hal yang menjadi bagian dari identitas
+                KKN Nalarasa selama menjalankan kegiatan di desa.
+            </p>
+
+        </div>
+
+
+        <div class="identity-grid">
+
+
+            <div class="identity-card">
+
+                <div class="identity-icon">
+                    📍
+                </div>
+
+                <h3>
+                    Lokasi Pengabdian
+                </h3>
+
+                <p>
+                    Kegiatan KKN Nalarasa dilaksanakan di
+                    Desa Ujung-ujung, Kecamatan Pabelan,
+                    Kabupaten Semarang, Jawa Tengah.
+                </p>
+
+            </div>
+
+
+            <div class="identity-card">
+
+                <div class="identity-icon">
+                    👥
+                </div>
+
+                <h3>
+                    Kolaborasi
+                </h3>
+
+                <p>
+                    Kegiatan dilaksanakan dengan mengedepankan
+                    kerja sama antara mahasiswa, pemerintah desa,
+                    dan masyarakat.
+                </p>
+
+            </div>
+
+
+            <div class="identity-card">
+
+                <div class="identity-icon">
+                    🌱
+                </div>
+
+                <h3>
+                    Pengabdian
+                </h3>
+
+                <p>
+                    Menjadikan kegiatan KKN sebagai kesempatan
+                    untuk belajar sekaligus memberikan kontribusi
+                    bagi lingkungan masyarakat.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NILAI NALARASA
+===================================================== -->
+
+<section class="values">
+
+    <div class="wrap">
+
+        <div class="values-grid">
+
+
+            <div>
+
+                <p class="section-label">
+                    Nilai Nalarasa
+                </p>
+
+                <h2>
+                    Nalar dalam berpikir,
+                    rasa dalam bertindak.
+                </h2>
+
+                <p class="values-intro">
+                    Nalarasa menjadi semangat yang kami bawa
+                    dalam menjalankan setiap kegiatan. Kami
+                    percaya bahwa pengabdian bukan hanya tentang
+                    melakukan kegiatan, tetapi juga memahami
+                    kebutuhan dan kondisi masyarakat.
+                </p>
+
+            </div>
+
+
+            <div class="value-list">
+
+
+                <div class="value-item">
+
+                    <div class="value-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Kolaborasi
+                    </h3>
+
+                    <p>
+                        Membangun kerja sama dan komunikasi
+                        dengan masyarakat serta berbagai pihak.
+                    </p>
+
+                </div>
+
+
+                <div class="value-item">
+
+                    <div class="value-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Kepedulian
+                    </h3>
+
+                    <p>
+                        Memahami lingkungan dan kebutuhan
+                        masyarakat dengan sikap terbuka.
+                    </p>
+
+                </div>
+
+
+                <div class="value-item">
+
+                    <div class="value-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Kreativitas
+                    </h3>
+
+                    <p>
+                        Mengembangkan ide dan kegiatan yang
+                        sesuai dengan potensi lingkungan desa.
+                    </p>
+
+                </div>
+
+
+                <div class="value-item">
+
+                    <div class="value-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Tanggung Jawab
+                    </h3>
+
+                    <p>
+                        Melaksanakan setiap kegiatan dengan
+                        komitmen dan tanggung jawab.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TUJUAN
+===================================================== -->
+
+<section class="purpose" id="program">
+
+    <div class="wrap">
+
+        <div class="purpose-head">
+
+            <p class="section-label">
+                Tujuan
+            </p>
+
+            <h2 class="section-title">
+                Apa yang ingin kami lakukan?
+            </h2>
+
+            <p>
+                Kegiatan KKN Nalarasa diarahkan untuk menjadi
+                pengalaman belajar sekaligus bentuk kontribusi
+                mahasiswa di tengah masyarakat.
+            </p>
+
+        </div>
+
+
+        <div class="purpose-grid">
+
+
+            <div class="purpose-card">
+
+                <h3>
+                    Belajar Bersama
+                </h3>
+
+                <p>
+                    Mengenal kehidupan masyarakat secara langsung
+                    dan memperoleh pengalaman dari lingkungan
+                    tempat pelaksanaan KKN.
+                </p>
+
+            </div>
+
+
+            <div class="purpose-card">
+
+                <h3>
+                    Berkontribusi
+                </h3>
+
+                <p>
+                    Menggunakan pengetahuan dan kemampuan
+                    mahasiswa untuk ikut mendukung berbagai
+                    kegiatan yang ada di desa.
+                </p>
+
+            </div>
+
+
+            <div class="purpose-card">
+
+                <h3>
+                    Membangun Kolaborasi
+                </h3>
+
+                <p>
+                    Menciptakan hubungan kerja sama yang baik
+                    antara mahasiswa dengan masyarakat dan
+                    pemerintah desa.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LOKASI
+===================================================== -->
+
+<section class="location" id="kontak">
+
+    <div class="wrap">
+
+        <div class="location-box">
+
+
+            <div class="location-info">
+
+                <p class="section-label">
+                    Lokasi KKN
+                </p>
+
+                <h2>
+                    Desa Ujung-ujung
+                </h2>
+
+                <p>
+                    Desa Ujung-ujung menjadi tempat KKN Nalarasa
+                    untuk melaksanakan berbagai kegiatan bersama
+                    masyarakat selama masa pengabdian.
+                </p>
+
+
+                <div class="location-detail">
+
+                    <strong>
+                        Kecamatan
+                    </strong>
+
+                    <span>
+                        Pabelan
+                    </span>
+
+                </div>
+
+
+                <div class="location-detail">
+
+                    <strong>
+                        Kabupaten
+                    </strong>
+
+                    <span>
+                        Semarang
+                    </span>
+
+                </div>
+
+
+                <div class="location-detail">
+
+                    <strong>
+                        Provinsi
+                    </strong>
+
+                    <span>
+                        Jawa Tengah
+                    </span>
+
+                </div>
+
+            </div>
+
+
+           <div class="location-photo">
+    <iframe
+        src="https://www.google.com/maps?q=Desa%20Ujung-Ujung%2C%20Kecamatan%20Pabelan%2C%20Kabupaten%20Semarang%2C%20Jawa%20Tengah&output=embed"
+        width="100%"
+        height="300"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="wrap">
+
+        <div class="f-grid">
+
+
+            <div>
+
+                <a href="index.html" class="f-brand">
+
+                    <img
+                        src="logo.jpeg"
+                        alt="Logo KKN Nalarasa"
+                        class="logo">
+
+                    <span>
+                        KKN Nalarasa
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Kelompok Kuliah Kerja Nyata di Desa Ujung-ujung
+                    merajut nalar dan rasa untuk pembangunan desa
+                    yang berkelanjutan.
+                </p>
+
+            </div>
+
+
+            <div class="f-col">
+
+                <h5>
+                    Navigasi
+                </h5>
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="profil.html">
+                    Profil
+                </a>
+
+                <a href="program.html">
+                    Program Kerja
+                </a>
+
+                <a href="berita page.html">
+                    Berita
+                </a>
+
+            </div>
+
+
+            <div class="f-col">
+
+                <h5>
+                    Kontak
+                </h5>
+
+                <li>
+                    Desa Ujung-ujung, Kec. Pabelan,
+                    Kab. Semarang Jawa Tengah
+                </li>
+
+                <li>
+                    Instagram: @ppm.nalarasa
+                </li>
+
+                <li>
+                    TikTok: @kkn.nalarasa.2026
+                </li>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="f-bottom">
+
+            <p>
+                © <span id="year"></span>
+                KKN Nalarasa · Desa Ujung-ujung
+            </p>
+
+            <a href="index.html">
+                Kembali ke atas ↑
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    // Tahun otomatis
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    // Menu mobile
+
+    const navToggle =
+        document.getElementById("navToggle");
+
+    const navLinks =
+        document.getElementById("navLinks");
+
+
+    navToggle.addEventListener("click", function(){
+
+        navLinks.classList.toggle("active");
+
+    });
+
+</script>
+
+
+</body>
+</html>

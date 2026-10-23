@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - KKN Nalarasa</title>
+
+    <style>
+        :root {
+            --bg: #F7F5EC;
+            --surface: #F1EFE4;
+            --ink: #18392B;
+            --ink-soft: #68746C;
+            --green: #527A61;
+            --green-dark: #18392B;
+            --gold: #D9B85B;
+            --border: #DDDCCF;
+            --radius: 18px;
+            --font-body: Arial, sans-serif;
+            --font-display: Georgia, serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: 1120px;
+            width: calc(100% - 40px);
+            margin: 0 auto;
+        }
+
+        /* NAV */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--ink);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .brand .logo {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.9rem;
+        }
+
+        .nav-links a {
+            color: var(--ink-soft);
+            font-size: 0.92rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--green);
+        }
+
+        .nav-login {
+            border: 1.5px solid var(--ink);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.88rem !important;
+            font-weight: 600;
+        }
+
+        .nav-login:hover {
+            background: var(--ink);
+            color: var(--bg) !important;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--ink);
+        }
+
+        /* HERO KONTAK */
+
+        .contact-hero {
+            padding: 6rem 0 5rem;
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(217, 184, 91, 0.13),
+                    transparent 28%
+                ),
+                var(--bg);
+        }
+
+        .contact-hero .eyebrow {
+            color: var(--green);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            max-width: 750px;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-hero h1 span {
+            color: var(--green);
+        }
+
+        .contact-hero p {
+            color: var(--ink-soft);
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* KONTAK */
+
+        .contact-section {
+            padding: 5rem 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-label {
+            color: var(--green);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.7rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.2;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-heading > p:last-child {
+            color: var(--ink-soft);
+            line-height: 1.8;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 2rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: 0.25s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--green);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(24, 57, 43, 0.06);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: #E9EFE9;
+            color: var(--green);
+            margin-bottom: 1.3rem;
+            font-size: 1.25rem;
+        }
+
+        .contact-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .contact-card p {
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--green);
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-top: auto;
+        }
+
+        .contact-link:hover {
+            color: var(--green-dark);
+        }
+
+        /* PENUTUP */
+
+        .contact-note {
+            padding: 4rem 0;
+        }
+
+        .note-box {
+            padding: 2.5rem;
+            background: var(--green-dark);
+            color: #EDE9D8;
+            border-radius: 22px;
+            text-align: center;
+        }
+
+        .note-box h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            margin-bottom: 0.7rem;
+        }
+
+        .note-box p {
+            color: #C9C4AE;
+            max-width: 620px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: var(--green-dark);
+            color: #EDE9D8;
+            padding: 3.5rem 0 1.5rem;
+            padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.8fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .f-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 0.9rem;
+            color: #EDE9D8;
+        }
+
+        .f-brand .logo {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .f-grid p {
+            font-size: 0.87rem;
+            color: #C9C4AE;
+            max-width: 32ch;
+        }
+
+        .f-col h5 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #EDE9D8;
+            margin-bottom: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .f-col a,
+        .f-col li {
+            display: block;
+            font-size: 0.87rem;
+            color: #C9C4AE;
+            margin-bottom: 0.6rem;
+            list-style: none;
+        }
+
+        .f-col a:hover {
+            color: var(--gold);
+        }
+
+        .f-bottom {
+            border-top: 1px solid rgba(237, 233, 216, 0.15);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            font-size: 0.8rem;
+            color: #B4AF98;
+        }
+
+        .f-bottom a {
+            color: #B4AF98;
+        }
+
+        .f-bottom a:hover {
+            color: var(--gold);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .f-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav-inner {
+                padding: 0.8rem 1rem;
+            }
+
+            .brand {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                padding: 1rem 1.2rem;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.75rem 0;
+            }
+
+            .nav-login {
+                text-align: center;
+                margin-top: 0.4rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .contact-hero {
+                padding: 4rem 0;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                padding: 4rem 0;
+            }
+
+            .contact-note {
+                padding: 3rem 0;
+            }
+
+            .note-box {
+                padding: 2rem 1.3rem;
+            }
+
+            .f-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .f-bottom {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+    <div class="nav-inner">
+
+        <a href="index.html" class="brand">
+            <img src="logo.jpeg" alt="Logo KKN Nalarasa" class="logo">
+            <span>KKN NALARASA</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="program.html">Program Kerja</a>
+            <a href="berita page.html">Berita</a>
+            <a href="kontak.html" class="active">Kontak</a>
+            <a href="login.html" class="nav-login">Masuk</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="contact-hero">
+    <div class="wrap">
+
+        <p class="eyebrow">Kontak Kami</p>
+
+        <h1>
+            Temukan <span>KKN Nalarasa</span>
+        </h1>
+
+        <p>
+            Kenali lokasi pengabdian dan temukan media sosial
+            KKN Nalarasa melalui informasi kontak berikut.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- INFORMASI KONTAK -->
+
+<section class="contact-section" id="kontak-info">
+    <div class="wrap">
+
+        <div class="section-heading">
+            <p class="section-label">Informasi Kontak</p>
+
+            <h2 class="section-title">
+                Terhubung dengan Kami
+            </h2>
+
+            <p>
+                Berikut informasi lokasi dan media sosial
+                KKN Nalarasa yang tercantum pada halaman kami.
+            </p>
+        </div>
+
+
+        <div class="contact-grid">
+
+            <!-- ALAMAT -->
+
+            <article class="contact-card">
+                <div class="contact-icon" aria-hidden="true">
+                    📍
+                </div>
+
+                <h3>Lokasi KKN</h3>
+
+                <p>
+                    Desa Ujung-ujung, Kecamatan Pabelan,
+                    Kabupaten Semarang, Jawa Tengah.
+                </p>
+
+                <span class="contact-link">
+                    Lokasi pengabdian
+                </span>
+            </article>
+
+
+            <!-- INSTAGRAM -->
+
+            <article class="contact-card">
+                <div class="contact-icon" aria-hidden="true">
+                    ◎
+                </div>
+
+                <h3>Instagram</h3>
+
+                <p>
+                    Ikuti dokumentasi dan informasi kegiatan
+                    KKN Nalarasa melalui Instagram.
+                </p>
+
+                <a
+                    href="https://www.instagram.com/ppm.nalarasa/"
+                    class="contact-link"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    @ppm.nalarasa ↗
+                </a>
+            </article>
+
+
+            <!-- TIKTOK -->
+
+            <article class="contact-card">
+                <div class="contact-icon" aria-hidden="true">
+                    ♪
+                </div>
+
+                <h3>TikTok</h3>
+
+                <p>
+                    Temukan dokumentasi kegiatan KKN Nalarasa
+                    melalui akun TikTok kami.
+                </p>
+
+                <a
+                    href="https://www.tiktok.com/@kkn.nalarasa.2026"
+                    class="contact-link"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    @kkn.nalarasa.2026 ↗
+                </a>
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PENUTUP -->
+
+<section class="contact-note">
+    <div class="wrap">
+
+        <div class="note-box">
+            <h2>KKN Nalarasa</h2>
+
+            <p>
+                Merajut nalar dan rasa untuk pembangunan desa
+                yang berkelanjutan.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="wrap">
+
+        <div class="f-grid">
+
+            <div>
+                <a href="index.html" class="f-brand">
+                    <img src="logo.jpeg" alt="Logo KKN Nalarasa" class="logo">
+                    <span>KKN Nalarasa</span>
+                </a>
+
+                <p>
+                    Kelompok Kuliah Kerja Nyata di Desa Ujung-ujung
+                    merajut nalar dan rasa untuk pembangunan desa
+                    yang berkelanjutan.
+                </p>
+            </div>
+
+            <div class="f-col">
+                <h5>Navigasi</h5>
+                <a href="index.html">Beranda</a>
+                <a href="profil.html">Profil</a>
+                <a href="program.html">Program Kerja</a>
+                <a href="berita page.html">Berita</a>
+            </div>
+
+            <div class="f-col">
+                <h5>Kontak</h5>
+                <li>Desa Ujung-ujung, Kec. Pabelan, Kab. Semarang Jawa Tengah</li>
+                <li>Instagram: @ppm.nalarasa</li>
+                <li>TikTok: @kkn.nalarasa.2026</li>
+            </div>
+
+        </div>
+
+        <div class="f-bottom">
+            <p>
+                © <span id="year"></span>
+                KKN Nalarasa · Desa Ujung-ujung
+            </p>
+
+            <a href="index.html">Kembali ke atas ↑</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<script>
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+    });
+</script>
+
+</body>
+</html>

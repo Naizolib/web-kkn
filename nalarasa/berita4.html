@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Musrenbangdes Ujung-Ujung — KKN Nalarasa</title>
+
+    <style>
+        :root {
+            --bg: #F7F5EC;
+            --ink: #26352A;
+            --ink-soft: #687066;
+            --green: #55745A;
+            --green-dark: #1F3426;
+            --gold: #D9B65D;
+            --border: rgba(38, 53, 42, 0.12);
+
+            --font-display: Georgia, serif;
+            --font-body: Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            line-height: 1.7;
+        }
+
+        /* =========================
+           NAV
+        ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+
+            width: 100%;
+
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+
+            color: var(--ink);
+            text-decoration: none;
+
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .brand .logo {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.9rem;
+        }
+
+        .nav-links a {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 0.92rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--green);
+        }
+
+        .nav-login {
+            border: 1.5px solid var(--ink);
+
+            padding: 0.5rem 1.2rem;
+
+            border-radius: 100px;
+
+            font-size: 0.88rem !important;
+            font-weight: 600;
+        }
+
+        .nav-login:hover {
+            background: var(--ink);
+            color: var(--bg) !important;
+        }
+
+        .nav-toggle {
+            display: none;
+
+            flex-direction: column;
+            gap: 4px;
+
+            background: none;
+            border: none;
+
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+
+            background: var(--ink);
+        }
+
+        /* =========================
+           ARTIKEL
+        ========================= */
+
+        .article {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 6rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .article-category {
+            display: inline-block;
+
+            color: var(--green);
+            font-size: 0.78rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            line-height: 1.1;
+
+            max-width: 850px;
+            margin: 0 auto 1rem;
+        }
+
+        .article-date {
+            color: var(--ink-soft);
+            font-size: 0.88rem;
+        }
+
+        /* FOTO UTAMA */
+
+        .article-cover {
+            width: 100%;
+            height: 500px;
+
+            object-fit: cover;
+
+            border-radius: 22px;
+
+            display: block;
+
+            margin-bottom: 2.5rem;
+
+            background: #ddd;
+        }
+
+        /* ISI BERITA */
+
+        .article-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .article-lead {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            line-height: 1.7;
+
+            color: var(--ink);
+
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content p {
+            color: #4F594F;
+            font-size: 1rem;
+
+            margin-bottom: 1.3rem;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-display);
+            font-size: 1.7rem;
+
+            margin: 2.5rem 0 1rem;
+        }
+
+        /* FOTO TAMBAHAN */
+
+        .article-photo {
+            width: 100%;
+            border-radius: 16px;
+            margin: 1rem 0 2rem;
+            display: block;
+        }
+
+        /* KEMBALI */
+
+        .back-news {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            margin-top: 1.5rem;
+
+            color: var(--green);
+            text-decoration: none;
+
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .back-news:hover {
+            color: var(--green-dark);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: var(--green-dark);
+            color: #EDE9D8;
+
+            padding: 3.5rem 0 1.5rem;
+            padding-bottom: calc(
+                1.5rem + env(safe-area-inset-bottom, 0px)
+            );
+        }
+
+        .wrap {
+            max-width: 1120px;
+            width: calc(100% - 3rem);
+            margin: 0 auto;
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.8fr 1fr;
+
+            gap: 2.5rem;
+
+            margin-bottom: 2.5rem;
+        }
+
+        .f-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 0.6rem;
+
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+
+            margin-bottom: 0.9rem;
+
+            text-decoration: none;
+        }
+
+.f-brand {display: flex;align-items: center;gap: 0.6rem;font-family: var(--font-display);font-weight: 700;font-size: 1.15rem;margin-bottom: 0.9rem;color: #EDE9D8;}
+.f-brand .logo {width: 36px;height: 36px;object-fit: cover;border-radius: 10px;}
+
+        .f-grid p {
+            font-size: 0.87rem;
+            color: #C9C4AE;
+            max-width: 32ch;
+        }
+
+        .f-col h5 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+
+            letter-spacing: 0.04em;
+
+            color: #EDE9D8;
+
+            margin-bottom: 0.9rem;
+
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .f-col a,
+        .f-col li {
+            display: block;
+
+            font-size: 0.87rem;
+            color: #C9C4AE;
+
+            margin-bottom: 0.6rem;
+        }
+
+        .f-col a {
+            text-decoration: none;
+        }
+
+        .f-col a:hover {
+            color: var(--gold);
+        }
+
+        .f-col ul {
+            list-style: none;
+        }
+
+        .f-socials {
+            display: flex;
+            gap: 0.7rem;
+            margin-top: 0.3rem;
+        }
+
+        .f-socials a {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(237,233,216,0.3);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.95rem;
+
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+        .f-socials a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--green-dark);
+        }
+
+        .f-bottom {
+            border-top: 1px solid rgba(237,233,216,0.15);
+
+            padding-top: 1.5rem;
+
+            display: flex;
+            justify-content: space-between;
+
+            flex-wrap: wrap;
+
+            gap: 0.8rem;
+
+            font-size: 0.8rem;
+
+            color: #B4AF98;
+        }
+
+        .f-bottom a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .f-bottom a:hover {
+            color: var(--gold);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .nav-inner {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+
+                top: 100%;
+                left: 0;
+
+                width: 100%;
+
+                background: var(--bg);
+
+                border-bottom: 1px solid var(--border);
+
+                display: none;
+
+                flex-direction: column;
+                align-items: stretch;
+
+                gap: 0;
+
+                padding: 0.7rem 1rem;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.8rem 0.5rem;
+            }
+
+            .nav-login {
+                text-align: center;
+                margin: 0.4rem 0;
+            }
+
+            .article {
+                padding-top: 3.5rem;
+            }
+
+            .article-cover {
+                height: 300px;
+                border-radius: 16px;
+            }
+
+            .article-title {
+                font-size: 2.25rem;
+            }
+
+            .f-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .wrap {
+                width: calc(100% - 2rem);
+            }
+
+            .article {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .article-cover {
+                height: 240px;
+            }
+
+            .article-lead {
+                font-size: 1.1rem;
+            }
+
+            .f-bottom {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         NAV
+    ========================= -->
+
+    <nav>
+
+        <div class="nav-inner">
+
+            <a href="index.html" class="brand">
+
+                <img
+                    src="logo.jpeg"
+                    alt="Logo KKN Nalarasa"
+                    class="logo"
+                >
+
+                <span>KKN NALARASA</span>
+
+            </a>
+
+
+            <div class="nav-links" id="navLinks">
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="profil.html">
+                    Profil
+                </a>
+
+                <a href="program.html">
+                    Program Kerja
+                </a>
+
+                <a href="berita page.html" class="active">
+                    Berita
+                </a>
+
+                <a href="kontak.html">
+                    Kontak
+                </a>
+
+                <a href="login.html" class="nav-login">
+                    Masuk
+                </a>
+
+            </div>
+
+
+            <button
+                class="nav-toggle"
+                id="navToggle"
+                aria-label="Buka menu"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         ARTIKEL BERITA
+    ========================= -->
+
+    <main>
+
+        <article class="article">
+
+            <header class="article-header">
+
+                <div class="article-category">
+                    Berita Desa
+                </div>
+
+                <h1 class="article-title">
+            Perkuat Ukhuwah Islamiyah, NU Dusun Karang Gelar 
+            Pengajian Rutin Ahad Pon
+                </h1>
+
+                <div class="article-date">
+                    15 Oktober 2026
+                </div>
+
+            </header>
+
+
+            <!-- FOTO UTAMA -->
+
+            <img
+                src="pengajianpon.jpeg"
+                alt="Musrenbangdes Desa Ujung-Ujung"
+                class="article-cover"
+            >
+
+
+            <!-- ISI -->
+
+            <div class="article-content">
+
+                <p class="article-lead">
+                    Ujung-Ujung, 18 Oktober 2026-Pengajian 
+                    Rutin Ahad Pon Nahdlatul Ulama (NU) Desa Ujung-Ujung, 
+                    Kecamatan Pabelan, berlangsung pada Minggu (18/10/2026) 
+                    di Masjid Jami’ Shulton, Dusun Karang, RT 01/RW 02, 
+                    Desa Ujung-Ujung. Kegiatan yang dimulai pukul 09.00 WIB 
+                    tersebut dihadiri sekitar 350 jamaah.
+                </p>
+
+
+                <p>
+                   Pengajian ini menghadirkan Kyai Agus Hermawan, 
+                   M.A., dari Kudus sebagai penceramah. 
+                   Kegiatan diselenggarakan sebagai sarana meningkatkan 
+                   keimanan dan ketakwaan sekaligus mempererat silaturahmi 
+                   antarwarga melalui kegiatan keagamaan rutin.
+                </p>
+
+
+                <p>
+        Rangkaian acara diawali dengan pembukaan dan pembacaan 
+        Surah Al-Fatihah, dilanjutkan pembacaan ayat 
+        suci Al-Qur’an dan lantunan selawat Nabi oleh grup 
+        rebana. Acara kemudian dilanjutkan dengan sambutan 
+        Ketua NU Desa Ujung-Ujung, Aan Safroni, sekaligus kegiatan santunan anak 
+        yatim, serta sambutan dari takmir Masjid Jami’ Shulton, Ustaz Efendi.
+                </p>
+
+
+                <p>
+                    Acara inti diisi dengan mauidhoh hasanah oleh Kyai Agus Hermawan, M.A., yang dilanjutkan dengan doa. Melalui tausiyah tersebut, jamaah diharapkan memperoleh tambahan ilmu dan nasihat agama yang dapat diterapkan dalam kehidupan sehari-hari.
+                </p>
+
+
+                <p>
+                   Pengajian Rutin Ahad Pon ini menjadi salah satu upaya masyarakat Desa Ujung-Ujung dalam menjaga tradisi keagamaan, memperkuat ukhuwah Islamiyah, dan menumbuhkan kepedulian sosial melalui kegiatan santunan anak yatim.
+                </p>
+
+                <p>
+    Dengan terselenggaranya kegiatan ini, diharapkan pengajian rutin dapat terus menjadi wadah untuk mempererat kebersamaan serta meningkatkan kualitas kehidupan beragama masyarakat Desa Ujung-Ujung.
+                </p>
+
+            </div>
+
+        </article>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+    <a href="index.html" class="f-brand">
+        <img src="logo.jpeg" alt="Logo KKN Nalarasa" class="logo">
+        <span>KKN Nalarasa</span></a>
+    <p>
+        Kelompok Kuliah Kerja Nyata di Desa Ujung-ujung merajut nalar dan rasa untuk pembangunan desa yang berkelanjutan.
+    </p>
+</div>
+      <div class="f-col">
+        <h5>Navigasi</h5>
+        <a href="index.html">Beranda</a>
+        <a href="profil.html">Profil</a>
+        <a href="program.html">Program Kerja</a>
+        <a href="berita page.html">Berita</a>
+      </div>
+      <div class="f-col">
+        <h5>Kontak</h5>
+        <li>Desa Ujung-ujung, Kec. Pabelan, Kab. Semarang Jawa Tengah</li>
+        <li>Instagram: @ppm.nalarasa</li>
+        <li>TikTok: @kkn.nalarasa.2026</li>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>© <span id="year"></span> KKN Nalarasa · Desa Ujung-ujung</p>
+      <a href="index.html">Kembali ke atas ↑</a>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        // Tahun otomatis
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+        // Menu mobile
+
+        const navToggle =
+            document.getElementById("navToggle");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+
+        navToggle.addEventListener("click", function () {
+
+            navLinks.classList.toggle("show");
+
+        });
+
+
+        // Tutup menu setelah klik
+
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener("click", function () {
+
+                    navLinks.classList.remove("show");
+
+                });
+
+            });
+
+    </script>
+
+</body>
+</html>

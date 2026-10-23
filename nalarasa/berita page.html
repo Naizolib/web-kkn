@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Berita - KKN Nalarasa</title>
+
+    <style>
+        /* =========================
+           GLOBAL
+        ========================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        :root {
+            --bg: #F7F5EC;
+            --ink: #18392B;
+            --ink-soft: #5D6B62;
+            --green: #527A61;
+            --green-dark: #18392B;
+            --gold: #D9B85B;
+            --border: #DDDCCF;
+
+            --font-body: Arial, sans-serif;
+            --font-display: Georgia, serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+
+        /* =========================
+           NAV
+        ========================= */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* LOGO + NAMA */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--ink);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .brand .logo {
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* MENU */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.9rem;
+        }
+
+        .nav-links a {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 0.92rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        /* TOMBOL MASUK */
+        .nav-login {
+            border: 1.5px solid var(--ink);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.88rem !important;
+            font-weight: 600;
+        }
+
+        .nav-login:hover {
+            background: var(--ink);
+            color: var(--bg) !important;
+        }
+
+        /* MENU MOBILE */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--ink);
+        }
+
+
+        /* =========================
+           HEADER BERITA
+        ========================= */
+        .news-header {
+            padding: 5rem 0 2.5rem;
+            text-align: center;
+        }
+
+        .news-label {
+            display: inline-block;
+            color: var(--green);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.7rem;
+        }
+
+        .news-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--ink);
+            margin-bottom: 0.8rem;
+        }
+
+        .news-header p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: var(--ink-soft);
+            font-size: 0.98rem;
+        }
+
+
+        /* =========================
+           FILTER
+        ========================= */
+        .news-filter {
+            display: flex;
+            justify-content: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.8rem;
+        }
+
+        .filter-btn {
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--ink-soft);
+            padding: 0.55rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--green);
+            border-color: var(--green);
+            color: white;
+        }
+
+
+        /* =========================
+           CARD BERITA
+        ========================= */
+        .news-section {
+            padding-bottom: 5rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.6rem;
+        }
+
+        .news-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(24, 57, 43, 0.10);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 210px;
+            overflow: hidden;
+            background: #e9e7dc;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.05);
+        }
+
+        .news-content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--green);
+            font-size: 0.76rem;
+            font-weight: 600;
+            margin-bottom: 0.65rem;
+        }
+
+        .news-meta span:first-child {
+            background: #EEF3ED;
+            padding: 0.25rem 0.55rem;
+            border-radius: 50px;
+        }
+
+        .news-content h2 {
+            font-family: var(--font-display);
+            color: var(--ink);
+            font-size: 1.22rem;
+            line-height: 1.35;
+            margin-bottom: 0.65rem;
+        }
+
+        .news-content p {
+            color: var(--ink-soft);
+            font-size: 0.88rem;
+            line-height: 1.65;
+            margin-bottom: 1.2rem;
+        }
+
+        .news-link {
+            margin-top: auto;
+            color: var(--green);
+            font-size: 0.86rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .news-link:hover {
+            color: var(--green-dark);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+        footer {
+            background: var(--green-dark);
+            color: #EDE9D8;
+            padding: 3.5rem 0 1.5rem;
+            padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.8fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .f-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 0.9rem;
+            color: #EDE9D8;
+        }
+
+.f-brand {display: flex;align-items: center;gap: 0.6rem;font-family: var(--font-display);font-weight: 700;font-size: 1.15rem;margin-bottom: 0.9rem;color: #EDE9D8;}
+.f-brand .logo {width: 36px;height: 36px;object-fit: cover;border-radius: 10px;}
+
+        .f-grid p {
+            font-size: 0.87rem;
+            color: #C9C4AE;
+            max-width: 32ch;
+        }
+
+        .f-col h5 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #EDE9D8;
+            margin-bottom: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .f-col a,
+        .f-col li {
+            display: block;
+            font-size: 0.87rem;
+            color: #C9C4AE;
+            margin-bottom: 0.6rem;
+            list-style: none;
+        }
+
+        .f-col a:hover {
+            color: var(--gold);
+        }
+
+        .f-socials {
+            display: flex;
+            gap: 0.7rem;
+            margin-top: 0.3rem;
+        }
+
+        .f-socials a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(237, 233, 216, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+        .f-socials a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--green-dark);
+        }
+
+        .f-bottom {
+            border-top: 1px solid rgba(237, 233, 216, 0.15);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            font-size: 0.8rem;
+            color: #B4AF98;
+        }
+
+        .f-bottom a {
+            color: #B4AF98;
+        }
+
+        .f-bottom a:hover {
+            color: var(--gold);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        @media (max-width: 850px) {
+
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .f-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .nav-inner {
+                padding: 0.8rem 1rem;
+            }
+
+            .brand {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                padding: 1rem 1.2rem;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.75rem 0;
+            }
+
+            .nav-login {
+                text-align: center;
+                margin-top: 0.4rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .news-header {
+                padding: 3.5rem 0 2rem;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-image {
+                height: 220px;
+            }
+
+            .f-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .f-bottom {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+    <div class="nav-inner">
+
+        <a href="#beranda" class="brand">
+            <img src="logo.jpeg" alt="Logo KKN Nalarasa" class="logo">
+            <span>KKN NALARASA</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Beranda</a>
+            <a href="profil.html">Profil</a>
+            <a href="program.html">Program Kerja</a>
+            <a href="berita page.html">Berita</a>
+            <a href="kontak.html">Kontak</a>
+            <a href="login.html" class="nav-login">Masuk</a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</nav>
+
+
+<!-- =========================
+     HEADER BERITA
+========================= -->
+
+<header class="news-header">
+    <div class="wrap">
+
+        <span class="news-label">Kabar Nalarasa</span>
+
+        <h1>Berita & Kegiatan</h1>
+
+        <p>
+            Temukan berbagai informasi, kegiatan, program kerja,
+            dan cerita terbaru dari KKN Nalarasa Desa Ujung-ujung.
+        </p>
+
+    </div>
+</header>
+
+
+<!-- =========================
+     BERITA
+========================= -->
+
+<main class="news-section">
+
+    <div class="wrap">
+
+        <!-- FILTER -->
+        <div class="news-filter">
+            <button class="filter-btn active">Semua</button>
+            <button class="filter-btn">Kegiatan</button>
+            <button class="filter-btn">Program Kerja</button>
+            <button class="filter-btn">Informasi</button>
+        </div>
+
+
+        <!-- CARD -->
+        <div class="news-grid">
+
+
+            <!-- CARD 1 -->
+            <article class="news-card">
+
+                <div class="news-image">
+                    <img src="thumbnail2.jpeg" alt="Kegiatan KKN Nalarasa">
+                </div>
+
+                <div class="news-content">
+
+                    <div class="news-meta">
+                        <span>Kegiatan</span>
+                        <span>27 September 2026</span>
+                    </div>
+
+                    <h2>
+                        Pemdes Ujung-Ujung Gelar Musrenbangdes untuk Penyusunan RKPDes Tahun 2027
+                    </h2>
+
+                    <p>
+                        Kegiatan mahasiswa KKN Nalarasa dalam melaksanakan
+                        berbagai aktivitas bersama masyarakat Desa Sukamulya.
+                    </p>
+
+                    <a href="berita2.html" class="news-link">
+                        Baca selengkapnya →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+            <article class="news-card">
+
+                <div class="news-image">
+                    <img src="momen1.jpeg" alt="Program kerja KKN">
+                </div>
+
+                <div class="news-content">
+
+                    <div class="news-meta">
+                        <span>Program Kerja</span>
+                        <span>16 September 2026</span>
+                    </div>
+
+                    <h2>
+                    Penerjunan PPM 2026, Kelompok Nalarasa Siap Berkontribusi di Desa Ujung-Ujung
+
+                    </h2>
+
+                    <p>
+                        Berbagai program kerja mulai dijalankan sebagai bagian
+                        dari kontribusi mahasiswa kepada masyarakat desa.
+                    </p>
+
+                    <a href="berita.html" class="news-link">
+                        Baca selengkapnya →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+            <article class="news-card">
+
+                <div class="news-image">
+                    <img src="thumbnailberita1.jpeg" alt="Kegiatan masyarakat">
+                </div>
+
+                <div class="news-content">
+
+                    <div class="news-meta">
+                        <span>Kegiatan</span>
+                        <span>18 Agustus 2026</span>
+                    </div>
+
+                    <h2>
+                        Tingkatkan Kesadaran Masyarakat, 
+                        KKN Nalarasa Gelar Sosialisasi Pemeliharaan
+             Arsip Keluarga di Desa Ujung-Ujung
+                    </h2>
+
+                    <p>
+                        Ujung-Ujung, 15 Oktober 2026-Mahasiswa KKN 
+                        Nalarasa UIN Salatiga menyelenggarakan kegiatan 
+                        Sosialisasi Pemeliharaan Arsip 
+            Keluarga pada Kamis (15/10/2026), mulai pukul 09.40 WIB.
+                    </p>
+
+                    <a href="berita3.html" class="news-link">
+                        Baca selengkapnya →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 4 -->
+            <article class="news-card">
+
+                <div class="news-image">
+                    <img src="pengajianpon.jpeg" alt="Dokumentasi kegiatan KKN">
+                </div>
+
+                <div class="news-content">
+
+                    <div class="news-meta">
+                        <span>Informasi</span>
+                        <span>18 Oktober 2026</span>
+                    </div>
+
+                    <h2>
+                        Perkuat Ukhuwah Islamiyah, NU Dusun Karang Gelar Pengajian Rutin Ahad Pon
+                    </h2>
+
+                    <p>
+                        Ujung-Ujung, 18 Oktober 2026-Pengajian Rutin Ahad Pon Nahdlatul Ulama (NU)
+                         Desa Ujung-Ujung, Kecamatan Pabelan, 
+                         berlangsung pada Minggu (18/10/2026) di Masjid Jami’ S
+                         hulton, Dusun Karang, RT 01/RW 02, Desa Ujung-Ujung.
+                          Kegiatan yang dimulai pukul 09.00 WIB tersebut dihadiri 
+                          sekitar 350 jamaah.
+                    </p>
+
+                    <a href="berita4.html" class="news-link">
+                        Baca selengkapnya →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 5 -->
+            <article class="news-card">
+
+                <div class="news-image">
+                    <img src="hibahbuku.jpeg" alt="Kegiatan mahasiswa">
+                </div>
+
+                <div class="news-content">
+
+                    <div class="news-meta">
+                        <span>Kegiatan</span>
+                        <span>19 Oktober 2026</span>
+                    </div>
+
+                    <h2>
+                        KKN Nalarasa UIN Jalin Kerja Sama dengan Dinas 
+                        Kearsipan dan Perpustakaan Provinsi Jawa Tengah melalui Hibah Buku 
+                    </h2>
+
+                    <p>
+                        Kerja sama ini merupakan salah satu upaya untuk 
+                        mendukung pengembangan perpustakaan dan meningkatkan
+                         akses masyarakat terhadap bahan bacaan. 
+                    </p>
+
+                    <a href="berita5.html" class="news-link">
+                        Baca selengkapnya →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 6 -->
+            <article class="news-card">
+
+                <div class="news-image">
+                    <img src="momen2.jpeg" alt="Cerita KKN Nalarasa">
+                </div>
+
+                <div class="news-content">
+
+                    <div class="news-meta">
+                        <span>Informasi</span>
+                        <span>26 Agustus 2026</span>
+                    </div>
+
+                    <h2>
+                        Cerita dan Pengalaman Mahasiswa Selama KKN Nalarasa
+                    </h2>
+
+                    <p>
+                        Berbagai pengalaman mahasiswa selama mengikuti rangkaian
+                        kegiatan KKN menjadi bagian dari perjalanan Nalarasa.
+                    </p>
+
+                    <a href="#" class="news-link">
+                        Baca selengkapnya →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="wrap">
+
+        <div class="f-grid">
+
+<div><a href="index.html" class="f-brand">
+<img src="logo.jpeg" alt="Logo KKN Nalarasa" class="logo">
+<span>KKN Nalarasa</span></a>
+<p>Kelompok Kuliah Kerja Nyata di Desa Ujung-ujung merajut nalar dan rasa untuk pembangunan desa yang berkelanjutan.</p>
+</div>
+
+
+            <div class="f-col">
+
+                <h5>Navigasi</h5>
+
+                <a href="index.html">Beranda</a>
+                <a href="profil.html">Profil</a>
+                <a href="program.html">Program Kerja</a>
+                <a href="berita page.html">Berita</a>
+
+            </div>
+
+
+            <div class="f-col">
+
+                <h5>Kontak</h5>
+
+                <li>
+                    Desa Ujung-ujung, Kec. Pabelan, Kab. Semarang Jawa Tengah
+                </li>
+
+                <li>
+                    kknnalarasa@gmail.com
+                </li>
+
+                <li>
+                    Instagram: @ppm.nalarasa
+                </li>
+
+                <li>
+                    TikTok: @kkn.nalarasa.2026
+                </li>
+
+            </div>
+
+        </div>
+
+
+        <div class="f-bottom">
+
+            <p>
+                © <span id="year"></span> KKN Nalarasa · Desa Ujung-ujung
+            </p>
+
+            <a href="index.html">
+                Kembali ke atas ↑
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    // Tahun otomatis
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    // Menu mobile
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+    });
+
+
+    // Filter tombol
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
+
+    filterButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            filterButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
